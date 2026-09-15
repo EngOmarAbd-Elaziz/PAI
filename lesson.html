@@ -1,17 +1,26 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lesson Player | Egyptian Baccalaureate</title>
-  
+  <title>CODEX Library</title>
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Fira+Code:wght@400;600;700&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-  
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Fira+Code:wght@400;600;700&family=Outfit:wght@400;600;700;800;900&display=swap"
+    rel="stylesheet">
+
+  <!-- Favicon & Browser Identity -->
+  <link rel="icon" type="image/png" href="CODEX_LOGO-preview.png" sizes="any">
+  <link rel="apple-touch-icon" href="CODEX_LOGO-preview.png">
+  <meta name="theme-color" content="#06b6d4">
+
   <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
   <!-- Background Ambient Glows -->
   <div class="ambient-glow ambient-glow-1"></div>
@@ -20,13 +29,13 @@
   <!-- Top Navigation -->
   <nav id="top-nav">
     <a href="index.html" class="nav-brand">
-      <div class="nav-logo">PAI</div>
+      <img class="nav-logo" src="CODEX_LOGO-removebg-preview.png" alt="CODEX Logo">
       <div class="nav-titles">
-        <div class="nav-title">Course Library</div>
+        <div class="nav-title">CODEX Library</div>
         <div class="nav-subtitle">2nd Secondary <span class="ar">| مسار الهندسة والحاسبات</span></div>
       </div>
     </a>
-    
+
     <div class="nav-actions">
       <a href="index.html" class="btn-nav-back">
         <span>←</span> Back to Library
@@ -36,7 +45,7 @@
 
   <!-- Main Content -->
   <main class="lesson-page" id="lesson-root">
-    
+
     <!-- Lesson Hero -->
     <header class="lesson-hero">
       <div class="lesson-hero-top">
@@ -52,7 +61,7 @@
 
     <!-- Two Column Layout -->
     <div class="lesson-layout">
-      
+
       <!-- 1. The Dynamic Slide Player -->
       <section class="slide-viewer-panel">
         <div class="slide-viewer-header">
@@ -65,21 +74,22 @@
             </button>
           </div>
         </div>
-        
+
         <div class="slide-viewer-progress">
-          <div class="slide-progress-meta">Slide <strong id="progress-current">1</strong> of <span id="progress-total">1</span></div>
+          <div class="slide-progress-meta">Slide <strong id="progress-current">1</strong> of <span
+              id="progress-total">1</span></div>
           <div class="slide-progress-track">
             <div class="slide-progress-fill" id="progress-bar"></div>
           </div>
         </div>
-        
+
         <!-- The stage where slide fragments are injected -->
         <div id="slide-stage">
           <div style="text-align: center; color: var(--text-muted); padding-top: 100px;">
             Loading slides...
           </div>
         </div>
-        
+
         <!-- Slide Controls (Prev/Next) -->
         <div class="slide-nav-bar">
           <button id="btn-prev" class="btn-nav-slide" title="Previous Slide (Left Arrow, Space)" disabled>❮</button>
@@ -98,7 +108,7 @@
           </div>
           <div class="handout-collapse-icon">▼</div>
         </div>
-        
+
         <div class="handout-body">
           <div class="handout-content" id="handout-content">
             <!-- Handout blocks will be injected here -->
@@ -126,4 +136,5 @@
   <script src="data/lessons.js"></script>
   <script src="js/lesson-player.js"></script>
 </body>
+
 </html>

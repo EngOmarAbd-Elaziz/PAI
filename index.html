@@ -1,17 +1,26 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Course Library | Egyptian Baccalaureate</title>
-  
+  <title>CODEX Library</title>
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Fira+Code:wght@400;600;700&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-  
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Fira+Code:wght@400;600;700&family=Outfit:wght@400;600;700;800;900&display=swap"
+    rel="stylesheet">
+
+  <!-- Favicon & Browser Identity -->
+  <link rel="icon" type="image/png" href="CODEX_LOGO-preview.png" sizes="any">
+  <link rel="apple-touch-icon" href="CODEX_LOGO-preview.png">
+  <meta name="theme-color" content="#06b6d4">
+
   <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
   <!-- Background Ambient Glows -->
   <div class="ambient-glow ambient-glow-1"></div>
@@ -20,9 +29,9 @@
   <!-- Top Navigation -->
   <nav id="top-nav">
     <a href="index.html" class="nav-brand">
-      <div class="nav-logo">PAI</div>
+      <img class="nav-logo" src="CODEX_LOGO-removebg-preview.png" alt="CODEX Logo">
       <div class="nav-titles">
-        <div class="nav-title">Course Library</div>
+        <div class="nav-title">CODEX Library</div>
         <div class="nav-subtitle">2nd Secondary <span class="ar">| مسار الهندسة والحاسبات</span></div>
       </div>
     </a>
@@ -30,13 +39,13 @@
 
   <!-- Main Content -->
   <main class="library-page" id="app-root">
-    
+
     <!-- Hero Section -->
     <header class="library-hero">
       <div class="library-hero-eyebrow">Digital Handouts</div>
       <h1>Programming <span>Mastery</span></h1>
       <div class="library-hero-ar">مكتبة الدروس التفاعلية والمذكرات الرقمية</div>
-      
+
       <div class="library-progress-summary">
         <span><strong id="completed-count">0</strong> of <span id="total-count">0</span> modules completed</span>
       </div>
@@ -48,7 +57,7 @@
         <h2 class="library-section-title">Foundation Modules</h2>
         <span class="library-section-count">الفصل الدراسي الأول</span>
       </div>
-      
+
       <div class="lessons-grid" id="lessons-grid">
         <!-- Lesson cards will be dynamically injected here by JS -->
       </div>
@@ -60,4 +69,5 @@
   <script src="data/lessons.js"></script>
   <script src="js/library.js"></script>
 </body>
+
 </html>

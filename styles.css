@@ -1984,8 +1984,138 @@ body::before {
   }
 }
 
+/* ==========================================================================
+   CUSTOM SCROLLBAR
+   Dark tech theme — matches cyan accent and dark background
+   ========================================================================== */
+
+/* Webkit (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+  border-left: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(6, 182, 212, 0.3);
+  border-radius: 99px;
+  transition: background 0.2s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(6, 182, 212, 0.6);
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--bg-primary);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(6, 182, 212, 0.3) var(--bg-primary);
+}
+
 @media (min-width: 960px) {
   .lesson-layout {
     grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================================
+   DESKTOP INTERACTIVE EXPERIENCE
+   Custom Cursor & Ambient Background Glow
+   ========================================================================== */
+@media (hover: hover) and (pointer: fine) {
+  /* Hide native cursor on EVERYTHING on desktop */
+  * {
+    cursor: none !important;
+  }
+  
+  /* Restore native text cursor ONLY inside real input/editor areas */
+  input,
+  textarea,
+  select,
+  .cm-editor *,
+  .cm-content,
+  .cm-scroller {
+    cursor: text !important;
+  }
+
+  /* Restore pointer for input checkboxes/radios/buttons */
+  input[type="button"],
+  input[type="submit"],
+  input[type="reset"],
+  input[type="checkbox"],
+  input[type="radio"] {
+    cursor: pointer !important;
+  }
+
+  /* Custom Cursor Dot — JS sets transform to translate3d(x-3, y-3, 0) */
+  .custom-cursor-dot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 6px;
+    background-color: var(--accent-cyan);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    will-change: transform;
+    transition: opacity 0.15s;
+    box-shadow: 0 0 8px var(--accent-cyan-glow), 0 0 2px var(--accent-cyan);
+  }
+
+  /* Custom Cursor Ring — JS sets transform to translate3d(x-16, y-16, 0) */
+  .custom-cursor-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 32px;
+    height: 32px;
+    border: 1.5px solid rgba(6, 182, 212, 0.45);
+    background-color: rgba(6, 182, 212, 0.04);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    will-change: transform;
+    transition: border-color 0.25s, background-color 0.25s,
+                box-shadow 0.25s, opacity 0.15s;
+    box-shadow: inset 0 0 8px rgba(6, 182, 212, 0.08);
+  }
+
+  /* Ring hover state — links / buttons */
+  .custom-cursor-ring.hover-active {
+    border-color: rgba(6, 182, 212, 0.9);
+    background-color: rgba(6, 182, 212, 0.1);
+    box-shadow: 0 0 16px rgba(6, 182, 212, 0.35);
+  }
+
+  /* Ring card hover state */
+  .custom-cursor-ring.card-hover {
+    border-color: rgba(139, 92, 246, 0.7);
+    background-color: rgba(139, 92, 246, 0.06);
+    box-shadow: 0 0 16px rgba(139, 92, 246, 0.25);
+  }
+
+  /* Ambient Mouse Glow — JS sets transform to translate3d(x-300, y-300, 0) */
+  .ambient-mouse-glow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(6, 182, 212, 0.07) 0%, transparent 65%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+    filter: blur(50px);
+    will-change: transform;
+    mix-blend-mode: screen;
   }
 }

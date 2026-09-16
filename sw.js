@@ -8,7 +8,7 @@
  * v2 changes: added vendor/codemirror-bundle.js to App Shell
  */
 
-const APP_SHELL_CACHE = 'codex-app-shell-v3';   // ← bumped from v2
+const APP_SHELL_CACHE = 'codex-app-shell-v4';   // ← bumped from v3
 const LESSON_CACHE_PREFIX = 'codex-lesson-';
 
 const APP_SHELL_ASSETS = [
@@ -30,6 +30,7 @@ const APP_SHELL_ASSETS = [
   'js/code-runner.js',
   'js/storage.js',
   'js/offline-manager.js',
+  'js/desktop-effects.js',
   // CodeMirror 6 bundle — local, fully offline
   'vendor/codemirror-bundle.js',
 ];

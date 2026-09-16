@@ -20,7 +20,28 @@ document.addEventListener('DOMContentLoaded', async () => {
     return;
   }
 
-  // 3. Populate Hero Meta
+  // 3. Resolve Offline Availability
+  let isDownloaded = false;
+  if (window.OfflineManager) {
+    isDownloaded = await window.OfflineManager.isLessonCached(lessonData.id, lessonData.version || 1);
+  }
+  
+  if (!navigator.onLine && !isDownloaded) {
+    // Block the entire lesson UI
+    document.getElementById('lesson-root').innerHTML = `
+      <div style="text-align: center; padding: 100px 20px;">
+        <div style="font-size: 48px; margin-bottom: 20px;">📶</div>
+        <h2 style="color: white; margin-bottom: 12px; font-family: 'Outfit', sans-serif;">Internet Connection Required</h2>
+        <p style="color: var(--text-dim); margin-bottom: 24px; max-width: 400px; margin-left: auto; margin-right: auto; line-height: 1.6;">
+          This lesson hasn't been saved for offline use. Please connect to the internet and download it first.
+        </p>
+        <a href="index.html" class="btn-primary" style="display: inline-block; text-decoration: none;">Return to Library</a>
+      </div>
+    `;
+    return;
+  }
+
+  // 4. Populate Hero Meta
   document.getElementById('hero-tag').textContent = `LESSON ${lessonData.number} • ${lessonData.tag}`;
   document.getElementById('hero-title').textContent = lessonData.title;
   document.getElementById('hero-title-ar').textContent = lessonData.titleAr;
@@ -31,13 +52,13 @@ document.addEventListener('DOMContentLoaded', async () => {
   const root = document.documentElement;
   root.style.setProperty('--lesson-accent', `var(--accent-${lessonData.color})`);
   
-  // 4. Render Handout
+  // 5. Render Handout
   renderHandout(lessonData.handout);
 
-  // 5. Setup Offline Controls
+  // 6. Setup Offline Controls
   setupOfflineControls(lessonData);
 
-  // 6. Fetch and Setup Slides
+  // 7. Fetch and Setup Slides
   await loadSlides(lessonData.slidesFile);
 });
 
@@ -233,7 +254,7 @@ async function loadSlides(fileUrl) {
         <a href="index.html" class="btn-nav-back" style="display: inline-block;">Return to Library</a>
       `;
     } else {
-      errorMsg = `Failed to load lesson slides. Make sure you are running a local server.`;
+      errorMsg = `Failed to load lesson slides. If your internet connection is unstable, try returning to the library and saving this lesson offline.`;
     }
     
     document.getElementById('slide-stage').innerHTML = `

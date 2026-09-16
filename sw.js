@@ -8,7 +8,7 @@
  * v2 changes: added vendor/codemirror-bundle.js to App Shell
  */
 
-const APP_SHELL_CACHE = 'codex-app-shell-v2';   // ← bumped from v1
+const APP_SHELL_CACHE = 'codex-app-shell-v3';   // ← bumped from v2
 const LESSON_CACHE_PREFIX = 'codex-lesson-';
 
 const APP_SHELL_ASSETS = [
@@ -75,7 +75,7 @@ self.addEventListener('fetch', (event) => {
   if (!isSameOrigin && !isGoogleFont) return;
 
   event.respondWith(
-    caches.match(event.request).then((cached) => {
+    caches.match(event.request, { ignoreSearch: true }).then((cached) => {
       if (cached) return cached;
 
       return fetch(event.request).then((response) => {

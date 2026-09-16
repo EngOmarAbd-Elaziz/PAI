@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript Lab | CODEX Library</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Fira+Code:wght@400;600;700&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <link rel="icon" type="image/png" href="CODEX_LOGO-preview.png" sizes="any">
+  <link rel="apple-touch-icon" href="CODEX_LOGO-preview.png">
+  <meta name="theme-color" content="#06b6d4">
+  <link rel="manifest" href="manifest.webmanifest">
+
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="css/lab.css">
+</head>
+<body>
+  <!-- Background Ambient Glows -->
+  <div class="ambient-glow ambient-glow-1"></div>
+  <div class="ambient-glow ambient-glow-2"></div>
+
+  <!-- Top Navigation -->
+  <nav id="top-nav">
+    <a href="index.html" class="nav-brand">
+      <img class="nav-logo" src="CODEX_LOGO-removebg-preview.png" alt="CODEX Logo">
+      <div class="nav-titles">
+        <div class="nav-title">CODEX Library</div>
+        <div class="nav-subtitle">2nd Secondary <span class="ar">| مسار الهندسة والحاسبات</span></div>
+      </div>
+    </a>
+
+    <div class="nav-actions">
+      <a href="index.html" class="btn-nav-back">
+        <span>←</span> Back to Library
+      </a>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="lab-page" id="app-root">
+    <header class="lab-header">
+      <div class="lab-title-group">
+        <h1>JavaScript <span>Lab</span></h1>
+        <div class="lab-subtitle-ar">بيئة تفاعلية لتجربة الأكواد</div>
+      </div>
+      <div class="lab-actions">
+        <button id="btn-run"   class="btn-primary"   aria-label="Run code">▶ Run</button>
+        <button id="btn-clear" class="btn-secondary" aria-label="Clear output">Clear</button>
+        <button id="btn-reset" class="btn-danger"    aria-label="Reset to default code">Reset</button>
+      </div>
+    </header>
+
+    <div class="lab-layout">
+
+      <!-- ── LEFT: Editor + Problems ── -->
+      <div class="editor-column">
+
+        <!-- Editor Panel -->
+        <section class="lab-panel editor-panel">
+          <div class="panel-header">
+            <span>💻 Code Editor</span>
+            <span class="panel-header-hint">Tab = indent · Ctrl+Z = undo · Ctrl+F = find</span>
+          </div>
+          <!-- CodeMirror mounts here. Falls back to <textarea> if bundle fails. -->
+          <div id="editor-container" class="editor-container" role="textbox" aria-label="JavaScript code editor" aria-multiline="true"></div>
+        </section>
+
+        <!-- Problems Panel -->
+        <section class="lab-panel problems-panel" id="problems-panel">
+          <div class="panel-header problems-panel-header" id="problems-toggle" role="button" tabindex="0" aria-expanded="true" aria-controls="problems-list">
+            <span>⚡ Problems</span>
+            <span class="problem-count-badge" id="problem-count">0</span>
+            <span class="problems-collapse-icon" aria-hidden="true">▾</span>
+          </div>
+          <div id="problems-list" class="problems-list">
+            <div class="problem-empty">✓ No problems detected</div>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- ── RIGHT: Output ── -->
+      <section class="lab-panel output-panel">
+        <div class="panel-header">
+          <span>⬛ Output</span>
+        </div>
+        <div id="console-output" class="console-output" role="log" aria-live="polite" aria-label="Console output"></div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Sandboxed iframe for safe code execution -->
+  <iframe id="sandbox" sandbox="allow-scripts" style="display:none;" title="Code execution sandbox"></iframe>
+
+  <!-- CodeMirror 6 bundle (local, fully offline) -->
+  <script src="vendor/codemirror-bundle.js"></script>
+  <!-- Code Runner logic -->
+  <script src="js/code-runner.js"></script>
+
+  <script>
+    // Service Worker registration
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js')
+          .catch(err => console.warn('SW registration failed:', err));
+      });
+    }
+
+    // Problems panel collapse toggle
+    document.getElementById('problems-toggle').addEventListener('click', () => {
+      const panel = document.getElementById('problems-panel');
+      const isOpen = panel.classList.toggle('collapsed');
+      document.getElementById('problems-toggle').setAttribute('aria-expanded', String(!isOpen));
+    });
+    document.getElementById('problems-toggle').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        document.getElementById('problems-toggle').click();
+      }
+    });
+  </script>
+</body>
+</html>

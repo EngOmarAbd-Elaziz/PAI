@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Offline Storage | CODEX Library</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Fira+Code:wght@400;600;700&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <link rel="icon" type="image/png" href="CODEX_LOGO-preview.png" sizes="any">
+  <link rel="apple-touch-icon" href="CODEX_LOGO-preview.png">
+  <meta name="theme-color" content="#06b6d4">
+  
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Background Ambient Glows -->
+  <div class="ambient-glow ambient-glow-1"></div>
+  <div class="ambient-glow ambient-glow-2"></div>
+
+  <!-- Top Navigation -->
+  <nav id="top-nav">
+    <a href="index.html" class="nav-brand">
+      <img class="nav-logo" src="CODEX_LOGO-removebg-preview.png" alt="CODEX Logo">
+      <div class="nav-titles">
+        <div class="nav-title">CODEX Library</div>
+        <div class="nav-subtitle">2nd Secondary <span class="ar">| مسار الهندسة والحاسبات</span></div>
+      </div>
+    </a>
+    
+    <div class="nav-actions">
+      <a href="index.html" class="btn-nav-back">
+        <span>←</span> Back to Library
+      </a>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="library-page" id="app-root">
+    
+    <header class="library-hero">
+      <div class="library-hero-eyebrow">Device Management</div>
+      <h1>Offline <span>Storage</span></h1>
+      <div class="library-hero-ar">إدارة التخزين للدروس المحفوظة</div>
+    </header>
+
+    <section class="library-section" style="max-width: 600px; margin: 0 auto;">
+      <div class="library-section-header">
+        <h2 class="library-section-title">Saved Lessons</h2>
+        <span class="library-section-count" id="saved-count">0 items</span>
+      </div>
+      
+      <div id="storage-list" style="display: flex; flex-direction: column; gap: 16px; margin-top: 20px;">
+        <div style="text-align: center; color: var(--text-muted); padding: 40px;">
+          Checking storage...
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <script src="data/lessons.js"></script>
+  <script src="js/storage.js"></script>
+</body>
+</html>

@@ -17,6 +17,7 @@
   <link rel="icon" type="image/png" href="CODEX_LOGO-preview.png" sizes="any">
   <link rel="apple-touch-icon" href="CODEX_LOGO-preview.png">
   <meta name="theme-color" content="#06b6d4">
+  <link rel="manifest" href="manifest.webmanifest">
 
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -35,6 +36,10 @@
         <div class="nav-subtitle">2nd Secondary <span class="ar">| مسار الهندسة والحاسبات</span></div>
       </div>
     </a>
+    <div class="nav-actions">
+      <a href="lab.html" class="btn-nav-link" style="color: var(--accent-cyan); text-decoration: none; font-size: 14px; font-weight: 600; font-family: 'Outfit', sans-serif;">💻 JS Lab</a>
+      <a href="storage.html" class="btn-nav-link" style="color: var(--text-muted); text-decoration: none; font-size: 14px; font-weight: 600; font-family: 'Outfit', sans-serif;">☁️ Storage</a>
+    </div>
   </nav>
 
   <!-- Main Content -->
@@ -67,7 +72,17 @@
 
   <!-- Data and Logic -->
   <script src="data/lessons.js"></script>
+  <script src="js/offline-manager.js"></script>
   <script src="js/library.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js').catch(err => {
+          console.warn('Service Worker registration failed:', err);
+        });
+      });
+    }
+  </script>
 </body>
 
 </html>

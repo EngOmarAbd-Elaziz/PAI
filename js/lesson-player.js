@@ -34,9 +34,53 @@ document.addEventListener('DOMContentLoaded', async () => {
   // 4. Render Handout
   renderHandout(lessonData.handout);
 
-  // 5. Fetch and Setup Slides
+  // 5. Setup Offline Controls
+  setupOfflineControls(lessonData);
+
+  // 6. Fetch and Setup Slides
   await loadSlides(lessonData.slidesFile);
 });
+
+async function setupOfflineControls(lessonData) {
+  const controlsDiv = document.getElementById('offline-controls');
+  const btnMakeOffline = document.getElementById('btn-make-offline');
+  
+  if (!lessonData.offline || !lessonData.offline.enabled || !window.OfflineManager) {
+    return;
+  }
+  
+  controlsDiv.style.display = 'block';
+  
+  const checkStatus = async () => {
+    const isCached = await OfflineManager.isLessonCached(lessonData.id, lessonData.version || 1);
+    if (isCached) {
+      btnMakeOffline.innerHTML = '✓ Available Offline';
+      btnMakeOffline.style.color = 'var(--accent-emerald)';
+      btnMakeOffline.style.borderColor = 'var(--accent-emerald)';
+      btnMakeOffline.disabled = true;
+    } else {
+      btnMakeOffline.innerHTML = '☁️ Save Offline';
+      btnMakeOffline.style.color = 'white';
+      btnMakeOffline.style.borderColor = 'var(--border-subtle)';
+      btnMakeOffline.disabled = false;
+    }
+  };
+  
+  await checkStatus();
+  
+  btnMakeOffline.addEventListener('click', async () => {
+    btnMakeOffline.disabled = true;
+    try {
+      await OfflineManager.cacheLesson(lessonData, (progress) => {
+        btnMakeOffline.innerHTML = `⏳ Saving... ${progress}%`;
+      });
+      await checkStatus();
+    } catch (err) {
+      btnMakeOffline.innerHTML = '❌ Failed to Save';
+      setTimeout(checkStatus, 3000);
+    }
+  });
+}
 
 /* ── Handout Rendering ──────────────────────────────────────────────────── */
 
@@ -179,9 +223,22 @@ async function loadSlides(fileUrl) {
     
   } catch (error) {
     console.error('Error loading slides:', error);
+    
+    let errorMsg = "Failed to load lesson slides.";
+    if (!navigator.onLine) {
+      errorMsg = `
+        <div style="font-size: 40px; margin-bottom: 16px;">📶</div>
+        <h3 style="color: white; margin-bottom: 8px;">Internet Connection Required</h3>
+        <p style="color: var(--text-dim); margin-bottom: 16px;">This lesson hasn't been saved for offline use yet. Connect to the internet to open it.</p>
+        <a href="index.html" class="btn-nav-back" style="display: inline-block;">Return to Library</a>
+      `;
+    } else {
+      errorMsg = `Failed to load lesson slides. Make sure you are running a local server.`;
+    }
+    
     document.getElementById('slide-stage').innerHTML = `
-      <div style="color: #ef4444; padding: 20px; text-align: center;">
-        Failed to load lesson slides. Make sure you are running a local server.
+      <div style="color: #ef4444; padding: 40px 20px; text-align: center;">
+        ${errorMsg}
       </div>
     `;
   }

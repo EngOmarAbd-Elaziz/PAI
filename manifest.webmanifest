@@ -1,0 +1,16 @@
+{
+  "name": "CODEX Library",
+  "short_name": "CODEX",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#06b6d4",
+  "description": "Digital Course Library for Egyptian Baccalaureate - Engineering & Computer Science Track",
+  "icons": [
+    {
+      "src": "CODEX_LOGO-preview.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

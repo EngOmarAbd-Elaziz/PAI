@@ -12,6 +12,8 @@ const LESSONS = [
   {
     id: 'lesson-01',
     number: '01',
+    version: 1,
+    offline: { enabled: true },
     title: 'Programming Fundamentals',
     titleAr: 'أساسيات البرمجة',
     tag: 'Foundation Review',
@@ -219,6 +221,8 @@ checkGrade("Sara", 42);    // Sara: Needs improvement` },
   // ,{
   //   id: 'lesson-02',
   //   number: '02',
+  //   version: 1,
+  //   offline: { enabled: true },
   //   title: 'Object-Oriented Programming',
   //   titleAr: 'البرمجة الكائنية',
   //   tag: 'OOP',

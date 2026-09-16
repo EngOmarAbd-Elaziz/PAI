@@ -3,7 +3,7 @@
  * Handles rendering the grid of lesson cards based on data/lessons.js
  */
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   // Ensure data exists
   if (typeof LESSONS === 'undefined' || !Array.isArray(LESSONS)) {
     console.error('LESSONS data not found!');
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const gridContainer = document.getElementById('lessons-grid');
   gridContainer.innerHTML = '';
 
-  LESSONS.forEach(lesson => {
+  for (const lesson of LESSONS) {
     const card = document.createElement('a');
     card.href = `lesson.html?id=${lesson.id}`;
     card.className = 'lesson-card';
@@ -30,6 +30,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // Default status logic for now
     const statusClass = 'status-not-started';
     const statusText = 'Not Started';
+    
+    // Check offline status
+    let offlineBadge = '';
+    if (lesson.offline && lesson.offline.enabled) {
+      const isCached = window.OfflineManager ? await OfflineManager.isLessonCached(lesson.id, lesson.version || 1) : false;
+      if (isCached) {
+        offlineBadge = `<div style="font-size: 11px; font-weight: bold; color: var(--accent-emerald); background: rgba(16, 185, 129, 0.1); padding: 2px 6px; border-radius: 4px; border: 1px solid rgba(16, 185, 129, 0.2);">✓ Offline</div>`;
+      }
+    }
 
     card.innerHTML = `
       <div class="card-top">
@@ -54,6 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="card-meta-item">
           <span>📝</span> Handout
         </div>
+        ${offlineBadge}
       </div>
       
       <!-- Progress (static for now) -->
@@ -73,5 +83,5 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
 
     gridContainer.appendChild(card);
-  });
+  }
 });

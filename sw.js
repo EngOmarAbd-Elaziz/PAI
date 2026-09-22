@@ -8,7 +8,7 @@
  * v2 changes: added vendor/codemirror-bundle.js to App Shell
  */
 
-const APP_SHELL_CACHE = 'codex-app-shell-v4';   // ← bumped from v3
+const APP_SHELL_CACHE = 'codex-app-shell-v5';   // ← bumped from v4
 const LESSON_CACHE_PREFIX = 'codex-lesson-';
 
 const APP_SHELL_ASSETS = [

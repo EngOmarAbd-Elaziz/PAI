@@ -212,7 +212,6 @@ checkGrade("Sara", 42);    // Sara: Needs improvement` },
         { title: '6. Semicolon After IF', desc: 'Writing if (x > 5); { ... } — the semicolon terminates the check prematurely.' }
       ]}
     ]
-  }
   },
   {
     id: 'lesson-02',

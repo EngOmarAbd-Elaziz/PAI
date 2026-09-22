@@ -226,7 +226,7 @@ checkGrade("Sara", 42);    // Sara: Needs improvement` },
     icon: '⚙️',
     description: 'Learn how to create reusable functions, pass parameters, and return values. Then visualize logic using Flowcharts.',
     descriptionAr: 'تعلم كيفية إنشاء دوال قابلة لإعادة الاستخدام، تمرير المتغيرات، وإرجاع القيم. ثم تخطيط المنطق باستخدام المخططات الانسيابية.',
-    slideCount: 0,
+    slideCount: 11,
     slidesFile: 'slides/lesson-02.html',
     handout: [
       { type: 'section-heading', text: '⚙️ Topic 1: What is a Function?', subtext: 'ما هي الدالة ولماذا نستخدمها؟' },
@@ -272,7 +272,14 @@ console.log(count);` },
     }
 } else {
     console.log("Study Harder");
-}` }
+}` },
+      { type: 'section-heading', text: '⚠️ Common Beginner Mistakes', subtext: 'أخطاء شائعة — احذر هذه المطبات!' },
+      { type: 'mistakes-grid', mistakes: [
+        { title: '1. Forgetting return', desc: 'If you do not write return, the result is lost and output is undefined.' },
+        { title: '2. Missing Function Call', desc: 'Writing a function without calling it means it will never run.' },
+        { title: '3. Wrong Arguments Count', desc: 'Passing 3 values to a function that only expects 2 causes errors.' },
+        { title: '4. String vs Variable', desc: 'sum("teamRed") passes text, sum(teamRed) passes the actual variable value.' }
+      ]}
     ]
   }
 ];

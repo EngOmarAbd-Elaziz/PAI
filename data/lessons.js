@@ -213,26 +213,67 @@ checkGrade("Sara", 42);    // Sara: Needs improvement` },
       ]}
     ]
   }
+  },
+  {
+    id: 'lesson-02',
+    number: '02',
+    version: 1,
+    offline: { enabled: true },
+    title: 'Functions & Flowcharts',
+    titleAr: 'الدوال والمخططات الانسيابية',
+    tag: 'Chapter 31 & 32',
+    tagAr: 'الفصل 31 و 32',
+    color: 'emerald',
+    icon: '⚙️',
+    description: 'Learn how to create reusable functions, pass parameters, and return values. Then visualize logic using Flowcharts.',
+    descriptionAr: 'تعلم كيفية إنشاء دوال قابلة لإعادة الاستخدام، تمرير المتغيرات، وإرجاع القيم. ثم تخطيط المنطق باستخدام المخططات الانسيابية.',
+    slideCount: 0,
+    slidesFile: 'slides/lesson-02.html',
+    handout: [
+      { type: 'section-heading', text: '⚙️ Topic 1: What is a Function?', subtext: 'ما هي الدالة ولماذا نستخدمها؟' },
+      { type: 'concept', title: 'What is a Function?', titleAr: 'ما هي الدالة؟', text: 'A function is a reusable block of code that performs a specific task. We use it to avoid repeating code.', ar: 'الدالة هي مجموعة من الأوامر البرمجية تم تجميعها معًا وإعطاؤها اسمًا محددًا، لتقوم بتنفيذ مهمة معينة بدلاً من تكرار الكود.' },
+      { type: 'rule', color: 'cyan', text: 'Parameter vs Argument: Parameter is the placeholder when defining the function. Argument is the real value passed when calling it.' },
+      { type: 'code', lang: 'javascript', label: 'Function to Add Two Values', text: `function sum(freestyle, breaststroke) {
+  let result = freestyle + breaststroke;
+  return result;
+}
 
-  // ══════════════════════════════════════════════════════════════
-  // ADD NEW LESSONS HERE ↓  (copy the template below)
-  // ══════════════════════════════════════════════════════════════
-  //
-  // ,{
-  //   id: 'lesson-02',
-  //   number: '02',
-  //   version: 1,
-  //   offline: { enabled: true },
-  //   title: 'Object-Oriented Programming',
-  //   titleAr: 'البرمجة الكائنية',
-  //   tag: 'OOP',
-  //   tagAr: 'البرمجة بالكائنات',
-  //   color: 'purple',
-  //   icon: '🏗️',
-  //   description: 'Classes, objects, properties and methods.',
-  //   descriptionAr: 'الفئات والكائنات والخصائص والطرق.',
-  //   slideCount: 0,
-  //   slidesFile: 'slides/lesson-02.html',
-  //   handout: []
-  // }
+let teamRed = sum(39.5, 60.5);
+console.log(teamRed); // 100` },
+      { type: 'rule', color: 'pink', text: 'Execution Flow: 1. Function creation 2. Function call 3. Arguments passed 4. Calculation 5. return sends result 6. Store/Print result' },
+      
+      { type: 'section-heading', text: '🔄 Topic 2: Variables as Arguments & Multiple Parameters', subtext: 'المتغيرات كمدخلات والمعاملات المتعددة' },
+      { type: 'concept', title: 'Adding More Parameters', titleAr: 'زيادة عدد الـ Parameters', text: 'Functions can take any number of parameters. This allows for more complex operations while maintaining reusability.', ar: 'يمكن للدالة أن تستقبل أي عدد من الـ Parameters، مما يسمح بإجراء عمليات معقدة وإعادة الاستخدام عدة مرات ببيانات مختلفة.' },
+      { type: 'code', lang: 'javascript', label: 'Using variables as arguments and Math.min()', text: `let teamRed = sum(39.5, 60.5, 58.5);
+let teamBlue = sum(40, 62, 58);
+let teamGreen = sum(41, 59.5, 60);
+
+console.log("The fastest time is " + Math.min(teamRed, teamBlue, teamGreen));` },
+      
+      { type: 'section-heading', text: '📐 Topic 3: Flowcharts & Conditions', subtext: 'المخططات الانسيابية والشروط' },
+      { type: 'concept', title: 'What is a Flowchart?', titleAr: 'ما هو المخطط الانسيابي؟', text: "A Flowchart is a visual representation of a program's logic and decisions.", ar: 'المخطط الانسيابي هو رسم بياني يمثل خطوات البرنامج والقرارات المنطقية داخله. يساعدنا في التفكير وتخطيط البرنامج قبل كتابة الكود.' },
+      { type: 'types-grid', types: [
+        { name: 'Decision (معين)', color: 'amber', icon: '🔷', desc: 'Represents an if condition', example: 'Is it sunny?' },
+        { name: 'Process (مستطيل)', color: 'emerald', icon: '▭', desc: 'Represents an operation', example: 'count++' },
+        { name: 'Arrows (أسهم)', color: 'cyan', icon: '➔', desc: 'Flow of execution', example: 'True / False paths' }
+      ]},
+      { type: 'code', lang: 'javascript', label: 'Array + Loop + Condition Pattern (Crucial!)', text: `let count = 0;
+for (let day of volunteerList) {
+  if (day == "Yes") {
+    count++;
+  }
+}
+console.log(count);` },
+      { type: 'concept', title: 'Nested Conditions', titleAr: 'الشروط المتداخلة', text: 'A Nested if is an if statement placed inside another if statement, used when a decision depends on a previous decision.', ar: 'تعني وضع شرط داخل شرط آخر. نستخدمها عندما نحتاج لاتخاذ قرار مبني على نتيجة قرار سابق.' },
+      { type: 'code', lang: 'javascript', label: 'Nested Conditions Example', text: `if (passed == true) {
+    if (score == 100) {
+        console.log("Full Mark");
+    } else {
+        console.log("Congratulations");
+    }
+} else {
+    console.log("Study Harder");
+}` }
+    ]
+  }
 ];

@@ -1,11 +1,14 @@
 /**
- * CODEX Library — JavaScript Lab (Code Runner)
- * IDE features: CodeMirror 6, Live Diagnostics, Interactive Console, Async Prompt
+ * CODEX Library — Web Compiler (HTML + CSS + JavaScript Lab)
+ * IDE features: CodeMirror 6, Live Diagnostics, Interactive Console, Async Prompt, Live Preview
  */
 
-const STORAGE_KEY = 'codex_lab_code';
+const STORAGE_KEY_JS = 'codex_lab_code_js';
+const STORAGE_KEY_HTML = 'codex_lab_code_html';
+const STORAGE_KEY_CSS = 'codex_lab_code_css';
+const LEGACY_STORAGE_KEY = 'codex_lab_code';
 
-const DEFAULT_CODE = `// Write your JavaScript here — use Run to execute!
+const DEFAULT_CODE_JS = `// Write your JavaScript here — use Run to execute!
 
 let name = prompt("Enter your name:");
 console.log("Hello, " + name + "!");
@@ -15,8 +18,30 @@ for (let i = 1; i <= 3; i++) {
 }
 `;
 
+const DEFAULT_CODE_HTML = `<!-- Write your HTML here -->
+
+<div id="app">
+  <h1>Hello Webpage</h1>
+  <button id="btn">Click Me</button>
+</div>
+`;
+
+const DEFAULT_CODE_CSS = `/* Write your CSS here */
+
+#app {
+  text-align: center;
+  padding: 20px;
+}
+
+h1 {
+  color: #06b6d4;
+}
+`;
+
 /* ─── State ──────────────────────────────────────────────────────────────── */
-let editorView = null;
+let editorViews = { html: null, css: null, js: null };
+let editorView = null; // Backwards compatibility for single editorView reference
+let currentLang = 'js';
 let currentDiagnostics = [];
 let executionState = 'IDLE'; // IDLE, RUNNING, WAITING, STOPPED
 
@@ -27,6 +52,58 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnReset = document.getElementById('btn-reset');
   const output   = document.getElementById('console-output');
   const sandbox  = document.getElementById('sandbox');
+
+  /* ── Tab setup ────────────────────────────────────────────────────────── */
+  const tabs = document.querySelectorAll('.editor-tab');
+  function switchTab(lang) {
+    currentLang = lang;
+    tabs.forEach(t => {
+      if (t.getAttribute('data-lang') === lang) {
+        t.classList.add('active');
+      } else {
+        t.classList.remove('active');
+      }
+    });
+
+    ['html', 'css', 'js'].forEach(l => {
+      const el = document.getElementById(`editor-container-${l}`);
+      if (el) el.style.display = (l === lang) ? 'block' : 'none';
+    });
+
+    if (editorViews[lang]) {
+      editorViews[lang].focus();
+    }
+  }
+  window.switchTab = switchTab;
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      switchTab(tab.getAttribute('data-lang'));
+    });
+  });
+
+  /* ── Output Mode Toggle ────────────────────────────────────────────────── */
+  const outputModeToggle = document.getElementById('output-mode-toggle');
+  const btnViewPreview   = document.getElementById('btn-view-preview');
+  const btnViewConsole   = document.getElementById('btn-view-console');
+
+  function setOutputView(view) {
+    if (view === 'preview') {
+      sandbox.style.display = 'block';
+      output.style.display = 'none';
+      btnViewPreview?.classList.add('active');
+      btnViewConsole?.classList.remove('active');
+    } else {
+      sandbox.style.display = 'none';
+      output.style.display = 'block';
+      btnViewConsole?.classList.add('active');
+      btnViewPreview?.classList.remove('active');
+    }
+  }
+  window.setOutputView = setOutputView;
+
+  btnViewPreview?.addEventListener('click', () => setOutputView('preview'));
+  btnViewConsole?.addEventListener('click', () => setOutputView('console'));
 
   if (window.CodexEditor) {
     initCodeMirror();
@@ -40,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (executionState === 'RUNNING' || executionState === 'WAITING') {
       stopExecution();
     } else {
-      runCode(getCode());
+      runCode();
     }
   });
 
@@ -50,8 +127,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   btnReset.addEventListener('click', () => {
     if (confirm('Reset your code to the default example?')) {
-      setCode(DEFAULT_CODE);
-      localStorage.setItem(STORAGE_KEY, DEFAULT_CODE);
+      setCode('js', DEFAULT_CODE_JS);
+      setCode('html', DEFAULT_CODE_HTML);
+      setCode('css', DEFAULT_CODE_CSS);
+      localStorage.setItem(STORAGE_KEY_JS, DEFAULT_CODE_JS);
+      localStorage.setItem(LEGACY_STORAGE_KEY, DEFAULT_CODE_JS);
+      localStorage.setItem(STORAGE_KEY_HTML, DEFAULT_CODE_HTML);
+      localStorage.setItem(STORAGE_KEY_CSS, DEFAULT_CODE_CSS);
       output.innerHTML = '';
       stopExecution();
     }
@@ -66,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
         appendOutput(event.data.args, event.data.level);
         break;
       case 'sandbox-error':
-        appendError(event.data.message, event.data.line);
+        appendError(event.data.message, event.data.line, event.data.source || 'JavaScript');
         break;
       case 'sandbox-clear':
         output.innerHTML = '';
@@ -81,9 +163,15 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // EXPOSE FOR TESTING
-  window.setLabCode = setCode;
-  window.getLabCode = getCode;
-  window.runLabCode = () => runCode(getCode());
+  window.setLabCode = (arg1, arg2) => {
+    if (arg2 === undefined && typeof arg1 === 'string') {
+      setCode('js', arg1);
+    } else {
+      setCode(arg1, arg2);
+    }
+  };
+  window.getLabCode = (lang) => getCode(lang || currentLang);
+  window.runLabCode = runCode;
   window.stopLabCode = stopExecution;
 
   /* ── Execution State Management ───────────────────────────────────────── */
@@ -118,7 +206,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (Array.isArray(val)) {
       const items = val.map(v => {
         if (typeof v === 'string') return `"${escapeHtml(v)}"`;
-        // recursively format without wrapping in spans for simplicity in arrays, or just use stringify
         return JSON.stringify(v);
       }).join(', ');
       return `[${items}]`;
@@ -138,7 +225,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const div = document.createElement('div');
     div.className = `log-entry ${level}`;
     
-    // If it's a string argument first, we don't wrap it in quotes for general logging to match browser console
     const formattedArgs = args.map((arg, idx) => {
       if (typeof arg === 'string' && args.length === 1) return escapeHtml(arg);
       if (typeof arg === 'string' && idx === 0) return escapeHtml(arg);
@@ -150,10 +236,10 @@ document.addEventListener('DOMContentLoaded', () => {
     scrollToBottom();
   }
 
-  function appendError(message, line) {
+  function appendError(message, line, sourceLang = 'JavaScript') {
     const div = document.createElement('div');
     div.className = `log-entry error`;
-    div.innerHTML = `<strong>Runtime Error</strong><br>${escapeHtml(message)}<br><span class="problem-loc">Line: ${line}</span>`;
+    div.innerHTML = `<strong>${escapeHtml(sourceLang)} Error</strong><br>${escapeHtml(message)}<br><span class="problem-loc">Line: ${line}</span>`;
     output.appendChild(div);
     scrollToBottom();
     setExecutionState('ERROR');
@@ -209,7 +295,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     const promptContainer = document.getElementById('active-prompt');
     if (promptContainer) {
-      // Replace input with static text to keep in history
       promptContainer.innerHTML = `
         <div class="prompt-msg">${escapeHtml(promptContainer.querySelector('.prompt-msg').textContent)}</div>
         <div class="prompt-answered"><span class="prompt-caret">&gt;</span> <span class="fmt-string">"${escapeHtml(value)}"</span></div>
@@ -232,26 +317,63 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ── Execution ────────────────────────────────────────────────────────── */
-  function getCode() {
-    if (editorView) return editorView.state.doc.toString();
-    return document.getElementById('code-editor-fallback')?.value ?? '';
+  function getCode(lang = currentLang) {
+    if (editorViews[lang]) return editorViews[lang].state.doc.toString();
+    return document.getElementById(`code-editor-fallback-${lang}`)?.value ?? '';
   }
 
-  function setCode(code) {
-    if (editorView) {
-      editorView.dispatch({ changes: { from: 0, to: editorView.state.doc.length, insert: code } });
+  function setCode(lang, code) {
+    if (code === undefined && typeof lang === 'string') {
+      code = lang;
+      lang = currentLang;
+    }
+    if (editorViews[lang]) {
+      editorViews[lang].dispatch({ changes: { from: 0, to: editorViews[lang].state.doc.length, insert: code } });
     } else {
-      const ta = document.getElementById('code-editor-fallback');
+      const ta = document.getElementById(`code-editor-fallback-${lang}`);
       if (ta) ta.value = code;
     }
   }
 
-  function runCode(code) {
+  function runCode() {
+    const codeJs = getCode('js');
+    const codeHtml = getCode('html');
+    const codeCss = getCode('css');
+
     output.innerHTML = '';
     removePromptUI();
     setExecutionState('RUNNING');
-    
-    // Source Transformation: replace prompt() with async bridge
+
+    const outputTitle = document.getElementById('output-title');
+    const hasHtml = codeHtml.trim() !== '';
+    const hasCss  = codeCss.trim() !== '';
+    const hasJs   = codeJs.trim() !== '';
+
+    if (!hasHtml && !hasCss) {
+      // Case A: Pure JavaScript
+      if (outputModeToggle) outputModeToggle.style.display = 'none';
+      if (outputTitle) outputTitle.textContent = '⬛ Output';
+      output.style.display = 'block';
+      sandbox.style.display = 'none';
+      runJSOnly(codeJs);
+    } else if (!hasHtml && hasCss) {
+      // CSS only without HTML
+      if (outputModeToggle) outputModeToggle.style.display = 'none';
+      if (outputTitle) outputTitle.textContent = '⬛ Output';
+      output.style.display = 'block';
+      sandbox.style.display = 'none';
+      appendSystemMessage('CSS requires HTML content to be previewed.', 'system');
+      setExecutionState('IDLE');
+    } else {
+      // Webpage Mode (HTML exists: Case B HTML only, Case C HTML+CSS, Case D HTML+JS, Case E HTML+CSS+JS)
+      if (outputModeToggle) outputModeToggle.style.display = 'flex';
+      if (outputTitle) outputTitle.textContent = '🌐 Web Page Preview';
+      setOutputView('preview');
+      runWebPage(codeHtml, codeCss, codeJs);
+    }
+  }
+
+  function runJSOnly(code) {
     const transformedCode = code.replace(/\bprompt\s*\(/g, 'await window.__prompt(');
 
     // The body <script> wrapper adds exactly 2 lines before student code:
@@ -265,7 +387,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const _sendErr = (msg, line) => {
         if (_errorSent) return;
         _errorSent = true;
-        window.parent.postMessage({ type: 'sandbox-error', message: msg, line: line }, '*');
+        window.parent.postMessage({ type: 'sandbox-error', message: msg, line: line, source: 'JavaScript' }, '*');
       };
       function _send(level, args) {
         window.parent.postMessage({ type: 'sandbox-log', level, args: Array.from(args) }, '*');
@@ -318,6 +440,99 @@ document.addEventListener('DOMContentLoaded', () => {
 
     sandbox.srcdoc = html;
   }
+
+  function runWebPage(codeHtml, codeCss, codeJs) {
+    const cssErr = checkCssSyntax(codeCss);
+    if (cssErr) {
+      appendError(cssErr.message, cssErr.line, 'CSS');
+    }
+
+    const bridgeScript = `
+      <script>
+        (function() {
+          let _errorSent = false;
+          function _sendErr(msg, line, src) {
+            window.parent.postMessage({ type: 'sandbox-error', message: msg, line: line, source: src || 'JavaScript' }, '*');
+          }
+          function _send(level, args) {
+            window.parent.postMessage({ type: 'sandbox-log', level: level, args: Array.from(args) }, '*');
+          }
+          console.log   = function() { _send('log',   arguments); };
+          console.warn  = function() { _send('warn',  arguments); };
+          console.error = function() { _send('error', arguments); };
+          console.info  = function() { _send('info',  arguments); };
+          console.clear = function() { window.parent.postMessage({ type: 'sandbox-clear' }, '*'); };
+
+          window.addEventListener('error', function(e) {
+            _sendErr(e.message || 'Error in JavaScript', e.lineno || '?', 'JavaScript');
+          });
+          window.addEventListener('unhandledrejection', function(e) {
+            let msg = e.reason ? (e.reason.message || String(e.reason)) : 'Unhandled Promise Rejection';
+            _sendErr(msg, '?', 'JavaScript');
+          });
+        })();
+      <\\/script>
+    `;
+
+    const styleTag = codeCss.trim() ? `<style>\n${codeCss}\n</style>` : '';
+    const scriptTag = codeJs.trim() ? `<script>\ntry {\n${codeJs}\n} catch(e) {\n  window.parent.postMessage({ type: 'sandbox-error', message: e.name + ': ' + e.message, line: '?', source: 'JavaScript' }, '*');\n}\n<\\/script>` : '';
+
+    const hasHtmlTag = /<html[\s>]/i.test(codeHtml);
+    const hasHeadTag = /<head[\s>]/i.test(codeHtml);
+    const hasBodyTag = /<body[\s>]/i.test(codeHtml);
+
+    let fullDoc = '';
+    if (hasHtmlTag) {
+      fullDoc = codeHtml;
+      if (hasHeadTag) {
+        fullDoc = fullDoc.replace(/<head[\s>]/i, (m) => `${m}\n${bridgeScript}\n${styleTag}\n`);
+      } else {
+        fullDoc = bridgeScript + '\n' + styleTag + '\n' + fullDoc;
+      }
+      if (hasBodyTag && /<\/body>/i.test(fullDoc)) {
+        fullDoc = fullDoc.replace(/<\/body>/i, `\n${scriptTag}\n</body>`);
+      } else {
+        fullDoc += `\n${scriptTag}`;
+      }
+    } else {
+      fullDoc = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  ${bridgeScript}
+  ${styleTag}
+</head>
+<body>
+  ${codeHtml}
+  ${scriptTag}
+</body>
+</html>`;
+    }
+
+    sandbox.srcdoc = fullDoc;
+    setExecutionState('IDLE');
+  }
+
+  function checkCssSyntax(css) {
+    if (!css.trim()) return null;
+    let depth = 0;
+    const lines = css.split('\n');
+    for (let i = 0; i < lines.length; i++) {
+      const l = lines[i];
+      for (let ch of l) {
+        if (ch === '{') depth++;
+        if (ch === '}') depth--;
+        if (depth < 0) {
+          return { message: 'Unexpected closing brace "}"', line: i + 1 };
+        }
+      }
+    }
+    if (depth > 0) {
+      return { message: 'Unclosed style block; missing "}"', line: lines.length };
+    }
+    return null;
+  }
 });
 
 /* ─── CodeMirror 6 Initialisation ────────────────────────────────────────── */
@@ -328,7 +543,7 @@ function initCodeMirror() {
     EditorState,
     defaultKeymap, history, historyKeymap, indentWithTab,
     searchKeymap, highlightSelectionMatches,
-    javascript,
+    javascript, html, css,
     syntaxHighlighting, indentOnInput, bracketMatching,
     closeBrackets, autocompletion, closeBracketsKeymap, completionKeymap,
     lintGutter, linter, lintKeymap,
@@ -336,16 +551,69 @@ function initCodeMirror() {
     codexDarkTheme, codexHighlightStyle,
   } = window.CodexEditor;
 
+  const commonExtensions = [
+    codexDarkTheme,
+    syntaxHighlighting(codexHighlightStyle),
+    lineNumbers(),
+    highlightActiveLineGutter(),
+    highlightActiveLine(),
+    drawSelection(),
+    bracketMatching(),
+    highlightSelectionMatches(),
+    history(),
+    indentOnInput(),
+    closeBrackets(),
+    keymap.of([
+      indentWithTab,
+      ...closeBracketsKeymap,
+      ...defaultKeymap,
+      ...searchKeymap,
+      ...historyKeymap,
+      ...completionKeymap,
+      ...lintKeymap,
+    ]),
+    EditorView.lineWrapping,
+  ];
+
+  // ── HTML Editor ───────────────────────────────────────────────────────────
+  const savedHtml = localStorage.getItem(STORAGE_KEY_HTML) ?? DEFAULT_CODE_HTML;
+  const stateHtml = EditorState.create({
+    doc: savedHtml,
+    extensions: [
+      ...commonExtensions,
+      html ? html() : [],
+      EditorView.updateListener.of((update) => {
+        if (update.docChanged) localStorage.setItem(STORAGE_KEY_HTML, update.state.doc.toString());
+      }),
+    ],
+  });
+  const containerHtml = document.getElementById('editor-container-html');
+  if (containerHtml) {
+    editorViews.html = new EditorView({ state: stateHtml, parent: containerHtml });
+  }
+
+  // ── CSS Editor ────────────────────────────────────────────────────────────
+  const savedCss = localStorage.getItem(STORAGE_KEY_CSS) ?? DEFAULT_CODE_CSS;
+  const stateCss = EditorState.create({
+    doc: savedCss,
+    extensions: [
+      ...commonExtensions,
+      css ? css() : [],
+      EditorView.updateListener.of((update) => {
+        if (update.docChanged) localStorage.setItem(STORAGE_KEY_CSS, update.state.doc.toString());
+      }),
+    ],
+  });
+  const containerCss = document.getElementById('editor-container-css');
+  if (containerCss) {
+    editorViews.css = new EditorView({ state: stateCss, parent: containerCss });
+  }
+
+  // ── JavaScript Editor ─────────────────────────────────────────────────────
   const jsLinter = linter((view) => {
     const code = view.state.doc.toString();
     const diagnostics = [];
-    
-    // Simulate our prompt transformation before linting so 'await window.__prompt' doesn't 
-    // cause "await outside async function" errors when the student writes top-level prompt.
-    // Acorn 'latest' supports top-level await in modules, so we just set sourceType: 'module'.
     try {
-      // Actually we just parse the raw code. If they use top-level prompt, acorn might complain 
-      // if it thinks it's a script without top-level await. sourceType: module fixes that.
       acornParse(code, { ecmaVersion: 'latest', sourceType: 'module' });
     } catch (err) {
       const pos = err.pos ?? 0;
@@ -357,50 +625,37 @@ function initCodeMirror() {
         message: err.message?.replace(/ \(\d+:\d+\)$/, '') ?? 'Syntax error',
       });
     }
-    
     currentDiagnostics = diagnostics;
     updateProblemsPanel(view, diagnostics);
     return diagnostics;
   }, { delay: 400 });
 
-  const savedCode = localStorage.getItem(STORAGE_KEY) ?? DEFAULT_CODE;
-
-  const startState = EditorState.create({
-    doc: savedCode,
+  const savedJs = localStorage.getItem(STORAGE_KEY_JS) ?? localStorage.getItem(LEGACY_STORAGE_KEY) ?? DEFAULT_CODE_JS;
+  const stateJs = EditorState.create({
+    doc: savedJs,
     extensions: [
-      codexDarkTheme,
-      syntaxHighlighting(codexHighlightStyle),
-      lineNumbers(),
-      highlightActiveLineGutter(),
+      ...commonExtensions,
       lintGutter(),
-      highlightActiveLine(),
-      drawSelection(),
-      bracketMatching(),
-      highlightSelectionMatches(),
-      history(),
-      indentOnInput(),
-      closeBrackets(),
       javascript({ jsx: false, typescript: false }),
       autocompletion({ override: [jsCompletions] }),
       jsLinter,
-      keymap.of([
-        indentWithTab,
-        ...closeBracketsKeymap,
-        ...defaultKeymap,
-        ...searchKeymap,
-        ...historyKeymap,
-        ...completionKeymap,
-        ...lintKeymap,
-      ]),
       EditorView.updateListener.of((update) => {
-        if (update.docChanged) localStorage.setItem(STORAGE_KEY, update.state.doc.toString());
+        if (update.docChanged) {
+          const str = update.state.doc.toString();
+          localStorage.setItem(STORAGE_KEY_JS, str);
+          localStorage.setItem(LEGACY_STORAGE_KEY, str);
+        }
       }),
-      EditorView.lineWrapping,
     ],
   });
+  const containerJs = document.getElementById('editor-container-js');
+  if (containerJs) {
+    editorViews.js = new EditorView({ state: stateJs, parent: containerJs });
+    editorView = editorViews.js;
+  }
 
-  const editorContainer = document.getElementById('editor-container');
-  editorView = new EditorView({ state: startState, parent: editorContainer });
+  window.editorViews = editorViews;
+  window.editorView = editorViews.js;
 }
 
 /* ─── Problems Panel ─────────────────────────────────────────────────────── */
@@ -433,9 +688,10 @@ function updateProblemsPanel(view, diagnostics) {
   list.querySelectorAll('.problem-item').forEach(el => {
     const go = () => {
       const from = parseInt(el.dataset.from, 10);
-      if (editorView && !isNaN(from)) {
-        editorView.dispatch({ selection: { anchor: from }, scrollIntoView: true });
-        editorView.focus();
+      if (window.switchTab) window.switchTab('js');
+      if (editorViews.js && !isNaN(from)) {
+        editorViews.js.dispatch({ selection: { anchor: from }, scrollIntoView: true });
+        editorViews.js.focus();
       }
     };
     el.addEventListener('click', go);
@@ -497,11 +753,22 @@ function jsCompletions(context) {
 
 /* ─── Fallback ───────────────────────────────────────────────────────────── */
 function initFallback() {
-  const container = document.getElementById('editor-container');
-  container.innerHTML = `<textarea id="code-editor-fallback" spellcheck="false"></textarea>`;
-  const ta = document.getElementById('code-editor-fallback');
-  ta.value = localStorage.getItem(STORAGE_KEY) ?? DEFAULT_CODE;
-  ta.addEventListener('input', () => localStorage.setItem(STORAGE_KEY, ta.value));
+  ['html', 'css', 'js'].forEach(lang => {
+    const container = document.getElementById(`editor-container-${lang}`);
+    if (container) {
+      container.innerHTML = `<textarea id="code-editor-fallback-${lang}" spellcheck="false" style="width:100%;height:100%;background:transparent;color:#e2e8f0;font-family:monospace;padding:12px;border:none;resize:none;outline:none;box-sizing:border-box;"></textarea>`;
+      const ta = document.getElementById(`code-editor-fallback-${lang}`);
+      const def = lang === 'js' ? (localStorage.getItem(STORAGE_KEY_JS) ?? localStorage.getItem(LEGACY_STORAGE_KEY) ?? DEFAULT_CODE_JS)
+                : lang === 'html' ? (localStorage.getItem(STORAGE_KEY_HTML) ?? DEFAULT_CODE_HTML)
+                : (localStorage.getItem(STORAGE_KEY_CSS) ?? DEFAULT_CODE_CSS);
+      ta.value = def;
+      ta.addEventListener('input', () => {
+        const key = lang === 'js' ? STORAGE_KEY_JS : lang === 'html' ? STORAGE_KEY_HTML : STORAGE_KEY_CSS;
+        localStorage.setItem(key, ta.value);
+        if (lang === 'js') localStorage.setItem(LEGACY_STORAGE_KEY, ta.value);
+      });
+    }
+  });
 }
 
 function escapeHtml(str) {

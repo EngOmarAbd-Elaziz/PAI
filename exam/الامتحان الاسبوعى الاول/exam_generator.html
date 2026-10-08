@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>بوابة استخراج الامتحان - CODEX</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <style>
+    body {
+      background: #e2e8f0;
+      font-family: 'Cairo', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+      color: #0f172a;
+    }
+
+    h1 {
+      color: #0f172a;
+      margin-bottom: 10px;
+    }
+
+    p.info {
+      color: #475569;
+      max-width: 600px;
+      text-align: center;
+      margin-bottom: 30px;
+      font-weight: 600;
+    }
+
+    .card {
+      background: #ffffff;
+      border: 2px solid #0f172a;
+      border-radius: 12px;
+      padding: 30px;
+      width: 100%;
+      max-width: 600px;
+      margin-bottom: 20px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 28px;
+      border-radius: 8px;
+      border: 2px solid #0f172a;
+      background: #0f172a;
+      color: #ffffff;
+      font-family: 'Cairo', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+      margin: 10px;
+    }
+
+    .btn:hover {
+      background: #1e293b;
+      transform: translateY(-2px);
+    }
+
+    .btn-yellow {
+      background: #f59e0b;
+      border-color: #f59e0b;
+      color: #0f172a;
+    }
+
+    .btn-yellow:hover {
+      background: #d97706;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>بوابة استخراج الامتحان الشامل</h1>
+  <p class="info">
+    تم تصميم الامتحان ونموذج الإجابة ليتوافق تماماً مع المعايير الأكاديمية والمحتوى النظري والعملي (نصف نظري ونصف عملي).
+  </p>
+
+  <div class="card">
+    <h2 style="color: #0f172a; margin-bottom: 15px;">1. امتحان الطالب (Student Exam)</h2>
+    <p style="color: #475569; margin-bottom: 20px;">يحتوي على الغلاف، 30 سؤال اختياري، و 10 أسئلة مقالية وتطبيقية.</p>
+    <a href="exam_student.html" target="_blank" class="btn">عرض الامتحان</a>
+  </div>
+
+  <div class="card">
+    <h2 style="color: #0f172a; margin-bottom: 15px;">2. نموذج الإجابة (Answer Key)</h2>
+    <p style="color: #475569; margin-bottom: 20px;">يحتوي على إجابات جميع الأسئلة مفصلة بشكل منفصل وسري.</p>
+    <a href="exam_answers.html" target="_blank" class="btn btn-yellow">عرض نموذج الإجابة</a>
+  </div>
+
+  <div class="card" style="border-color: #f59e0b;">
+    <h2 style="color: #f59e0b; margin-bottom: 15px;">كيفية الحفظ كصور عالية الجودة (Images)</h2>
+    <div style="text-align: right; color: #475569; font-size: 14px; line-height: 1.8;">
+      1. افتح صفحة الامتحان أو نموذج الإجابة بالضغط على الأزرار بالأعلى.<br>
+      2. استخدم إضافة متصفح (Extension) مثل <strong>GoFullPage</strong> أو <strong>Awesome Screenshot</strong> لالتقاط
+      الشاشة بالكامل بصيغة PNG أو JPG.<br>
+      3. أو يمكنك ببساطة الضغط على <strong>Ctrl + P</strong> واختيار "Save as PDF" ثم استخدام موقع مجاني مثل
+      Ilovepdf.com/pdf_to_jpg لاستخراج الصور بدقة A4 مثالية (أسهل وأفضل طريقة للحفاظ على جودة الخطوط للطباعة).<br>
+      <em>ملاحظة: التصميم مجهز تلقائياً للطباعة بمقاسات A4 دقيقة (بدون ألوان خلفية مزعجة، فقط أبيض وأسود وكحلي).</em>
+    </div>
+  </div>
+
+</body>
+
+</html>

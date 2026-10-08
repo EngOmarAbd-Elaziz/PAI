@@ -60,12 +60,18 @@
 
         <!-- Editor Panel -->
         <section class="lab-panel editor-panel">
-          <div class="panel-header">
-            <span>💻 Code Editor</span>
+          <div class="panel-header editor-tabs-header">
+            <div class="editor-tabs">
+              <button class="editor-tab" data-lang="html">HTML</button>
+              <button class="editor-tab" data-lang="css">CSS</button>
+              <button class="editor-tab active" data-lang="js">JavaScript</button>
+            </div>
             <span class="panel-header-hint">Tab = indent · Ctrl+Z = undo · Ctrl+F = find</span>
           </div>
           <!-- CodeMirror mounts here. Falls back to <textarea> if bundle fails. -->
-          <div id="editor-container" class="editor-container" role="textbox" aria-label="JavaScript code editor" aria-multiline="true"></div>
+          <div id="editor-container-html" class="editor-container" style="display: none;" role="textbox" aria-label="HTML code editor" aria-multiline="true"></div>
+          <div id="editor-container-css" class="editor-container" style="display: none;" role="textbox" aria-label="CSS code editor" aria-multiline="true"></div>
+          <div id="editor-container-js" class="editor-container" role="textbox" aria-label="JavaScript code editor" aria-multiline="true"></div>
         </section>
 
         <!-- Problems Panel -->
@@ -84,17 +90,19 @@
 
       <!-- ── RIGHT: Output ── -->
       <section class="lab-panel output-panel">
-        <div class="panel-header">
-          <span>⬛ Output</span>
+        <div class="panel-header output-panel-header">
+          <span id="output-title">⬛ Output</span>
+          <div id="output-mode-toggle" class="output-mode-toggle" style="display:none;">
+            <button id="btn-view-preview" class="output-mode-btn active" title="Web Page Preview">🌐 Preview</button>
+            <button id="btn-view-console" class="output-mode-btn" title="Console Logs & Errors">⬛ Console</button>
+          </div>
         </div>
         <div id="console-output" class="console-output" role="log" aria-live="polite" aria-label="Console output"></div>
+        <iframe id="sandbox" class="sandbox-output" sandbox="allow-scripts allow-modals" style="display:none;" title="Code execution sandbox"></iframe>
       </section>
 
     </div>
   </main>
-
-  <!-- Sandboxed iframe for safe code execution -->
-  <iframe id="sandbox" sandbox="allow-scripts" style="display:none;" title="Code execution sandbox"></iframe>
 
   <!-- CodeMirror 6 bundle (local, fully offline) -->
   <script src="vendor/codemirror-bundle.js"></script>

@@ -532,11 +532,11 @@ document.addEventListener('DOMContentLoaded', () => {
             _sendErr(msg, '?', 'JavaScript');
           });
         })();
-      <\\/script>
+      </script>
     `;
 
     const styleTag = codeCss.trim() ? `<style id="__codex_user_styles">\n${codeCss}\n</style>` : '';
-    const scriptTag = safeJs.trim() ? `<script id="__codex_user_script">\n${safeJs}\n<\\/script>` : '';
+    const scriptTag = safeJs.trim() ? `<script id="__codex_user_script">\n${safeJs}\n</script>` : '';
 
     const hasHtmlTag = /<html[\s>]/i.test(codeHtml);
     const hasHeadTag = /<head[\s>]/i.test(codeHtml);

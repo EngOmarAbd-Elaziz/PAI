@@ -12,10 +12,13 @@
   <div class="slide-body">
     <div class="content-text-side">
       <p class="concept-lead">
-        Welcome to the core of reusable engineering! We will learn how to create <span class="highlight">Functions</span> to eliminate repetitive code, and <span class="highlight">Flowcharts</span> to visually plan our logic.
+        Welcome to the core of reusable engineering! We will learn how to create <span
+          class="highlight">Functions</span> to eliminate repetitive code, and <span class="highlight">Flowcharts</span>
+        to visually plan our logic.
       </p>
       <div class="arabic-clarification">
-        اليوم ننتقل من كتابة الأوامر البسيطة إلى بناء "آلات" برمجية ذكية (Functions). هنتعلم إزاي نكتب الكود مرة واحدة ونستخدمه مئات المرات، وإزاي نرسم تفكيرنا باستخدام المخططات الانسيابية (Flowcharts) قبل كتابة الكود.
+        اليوم ننتقل من كتابة الأوامر البسيطة إلى بناء "آلات" برمجية ذكية (Functions). هنتعلم إزاي نكتب الكود مرة واحدة
+        ونستخدمه مئات المرات، وإزاي نرسم تفكيرنا باستخدام المخططات الانسيابية (Flowcharts) قبل كتابة الكود.
       </div>
       <ul class="feature-list">
         <li class="feature-item">
@@ -34,27 +37,35 @@
       <svg viewBox="0 0 500 260" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <linearGradient id="gradPath2" x1="0" y1="0" x2="500" y2="0" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#EC4899"/>
-            <stop offset="0.5" stop-color="#06B6D4"/>
-            <stop offset="1" stop-color="#10B981"/>
+            <stop stop-color="#EC4899" />
+            <stop offset="0.5" stop-color="#06B6D4" />
+            <stop offset="1" stop-color="#10B981" />
           </linearGradient>
         </defs>
-        <path d="M 100 130 L 400 130" stroke="url(#gradPath2)" stroke-width="6" stroke-linecap="round" fill="none" stroke-dasharray="10 6"/>
-        
+        <path d="M 100 130 L 400 130" stroke="url(#gradPath2)" stroke-width="6" stroke-linecap="round" fill="none"
+          stroke-dasharray="10 6" />
+
         <!-- Node 1: Function -->
-        <circle cx="100" cy="130" r="35" fill="#0E172A" stroke="#EC4899" stroke-width="4"/>
-        <text x="100" y="136" text-anchor="middle" fill="#EC4899" font-family="'Fira Code', monospace" font-size="24" font-weight="700">fn()</text>
-        <text x="100" y="190" text-anchor="middle" fill="#F8FAFC" font-family="'Outfit', sans-serif" font-size="14" font-weight="700">Functions</text>
+        <circle cx="100" cy="130" r="35" fill="#0E172A" stroke="#EC4899" stroke-width="4" />
+        <text x="100" y="136" text-anchor="middle" fill="#EC4899" font-family="'Fira Code', monospace" font-size="24"
+          font-weight="700">fn()</text>
+        <text x="100" y="190" text-anchor="middle" fill="#F8FAFC" font-family="'Outfit', sans-serif" font-size="14"
+          font-weight="700">Functions</text>
 
         <!-- Node 2: Parameters -->
-        <circle cx="250" cy="130" r="35" fill="#0E172A" stroke="#06B6D4" stroke-width="4"/>
-        <text x="250" y="136" text-anchor="middle" fill="#06B6D4" font-family="'Fira Code', monospace" font-size="24" font-weight="700">f(x)</text>
-        <text x="250" y="190" text-anchor="middle" fill="#F8FAFC" font-family="'Outfit', sans-serif" font-size="14" font-weight="700">Parameters</text>
+        <circle cx="250" cy="130" r="35" fill="#0E172A" stroke="#06B6D4" stroke-width="4" />
+        <text x="250" y="136" text-anchor="middle" fill="#06B6D4" font-family="'Fira Code', monospace" font-size="24"
+          font-weight="700">f(x)</text>
+        <text x="250" y="190" text-anchor="middle" fill="#F8FAFC" font-family="'Outfit', sans-serif" font-size="14"
+          font-weight="700">Parameters</text>
 
         <!-- Node 3: Flowcharts -->
-        <rect x="365" y="95" width="70" height="70" transform="rotate(45 400 130)" fill="#0E172A" stroke="#10B981" stroke-width="4"/>
-        <text x="400" y="136" text-anchor="middle" fill="#10B981" font-family="'Fira Code', monospace" font-size="20" font-weight="700">if?</text>
-        <text x="400" y="190" text-anchor="middle" fill="#F8FAFC" font-family="'Outfit', sans-serif" font-size="14" font-weight="700">Flowcharts</text>
+        <rect x="365" y="95" width="70" height="70" transform="rotate(45 400 130)" fill="#0E172A" stroke="#10B981"
+          stroke-width="4" />
+        <text x="400" y="136" text-anchor="middle" fill="#10B981" font-family="'Fira Code', monospace" font-size="20"
+          font-weight="700">if?</text>
+        <text x="400" y="190" text-anchor="middle" fill="#F8FAFC" font-family="'Outfit', sans-serif" font-size="14"
+          font-weight="700">Flowcharts</text>
       </svg>
     </div>
   </div>
@@ -81,7 +92,9 @@
         A <span class="highlight">Function</span> is a named block of reusable code designed to perform a specific task.
       </p>
       <div class="arabic-clarification">
-        في عالم البرمجة، لدينا مبدأ أساسي يسمى DRY (Don't Repeat Yourself). إذا وجدت نفسك تكتب نفس السطور البرمجية مراراً وتكراراً، فأنت بحاجة لإنشاء Function! تجمع فيها هذه السطور وتعطيها إسماً، ثم تكتفي بمناداتها (Call) متى احتجتها.
+        في عالم البرمجة، لدينا مبدأ أساسي يسمى DRY (Don't Repeat Yourself). إذا وجدت نفسك تكتب نفس السطور البرمجية
+        مراراً وتكراراً، فأنت بحاجة لإنشاء Function! تجمع فيها هذه السطور وتعطيها إسماً، ثم تكتفي بمناداتها (Call) متى
+        احتجتها.
       </div>
       <ul class="feature-list">
         <li class="feature-item">
@@ -98,11 +111,13 @@
         </li>
       </ul>
     </div>
-    
+
     <div class="visual-card" style="align-items: stretch; text-align: left; padding: 24px;">
-      <div style="font-size: 13px; font-weight: 800; color: var(--accent-pink); letter-spacing: 1px;">THE SYNTAX ANATOMY</div>
+      <div style="font-size: 13px; font-weight: 800; color: var(--accent-pink); letter-spacing: 1px;">THE SYNTAX ANATOMY
+      </div>
       <div class="code-container" style="margin-top: 12px;">
-        <pre class="code-box"><code><span class="token-comment">// 1. Function Definition (Building the Machine)</span>
+        <pre
+          class="code-box"><code><span class="token-comment">// 1. Function Definition (Building the Machine)</span>
 <span class="token-kw">function</span> <span class="token-fn">sum</span><span class="token-op">(</span>a, b<span class="token-op">)</span> <span class="token-op">{</span>
     <span class="token-kw">return</span> a <span class="token-op">+</span> b<span class="token-op">;</span>
 <span class="token-op">}</span>
@@ -111,7 +126,9 @@
 <span class="token-kw">let</span> <span class="token-var">result</span> <span class="token-op">=</span> <span class="token-fn">sum</span><span class="token-op">(</span><span class="token-num">10</span>, <span class="token-num">20</span><span class="token-op">)</span><span class="token-op">;</span>
 <span class="token-fn">console</span><span class="token-op">.</span><span class="token-fn">log</span><span class="token-op">(</span><span class="token-var">result</span><span class="token-op">)</span><span class="token-op">;</span> <span class="token-comment">// Prints 30</span></code></pre>
       </div>
-      <div style="margin-top: 10px; padding: 12px 16px; background: rgba(236, 72, 153, 0.1); border-radius: 8px; border: 1px solid rgba(236, 72, 153, 0.3); font-size: 13px; color: #fce7f3;" class="ar">
+      <div
+        style="margin-top: 10px; padding: 12px 16px; background: rgba(236, 72, 153, 0.1); border-radius: 8px; border: 1px solid rgba(236, 72, 153, 0.3); font-size: 13px; color: #fce7f3;"
+        class="ar">
         💡 بدون الخطوة الثانية (Call)، الماكينة موجودة لكنها مطفأة ولن تنفذ أي شيء!
       </div>
     </div>
@@ -132,28 +149,34 @@
   <div class="slide-body">
     <div class="content-text-side">
       <p class="concept-lead">
-        Many beginners confuse these two terms. Let's make it unforgettable using a <span class="highlight">real-world analogy</span>!
+        Many beginners confuse these two terms. Let's make it unforgettable using a <span class="highlight">real-world
+          analogy</span>!
       </p>
       <div class="arabic-clarification">
-        كيف تفرق بين الـ Parameter والـ Argument؟ تخيل استمارة التقديم في المدرسة. الورقة المطبوعة بها خانات فارغة (الاسم، السن). هذه الخانات هي الـ Parameters. أما بياناتك الحقيقية التي تكتبها بالقلم، فهي الـ Arguments!
+        كيف تفرق بين الـ Parameter والـ Argument؟ تخيل استمارة التقديم في المدرسة. الورقة المطبوعة بها خانات فارغة
+        (الاسم، السن). هذه الخانات هي الـ Parameters. أما بياناتك الحقيقية التي تكتبها بالقلم، فهي الـ Arguments!
       </div>
     </div>
 
     <div class="cards-grid-2">
       <!-- Parameter -->
-      <div class="visual-card" style="border-top: 4px solid var(--accent-cyan); align-items: flex-start; text-align: left;">
+      <div class="visual-card"
+        style="border-top: 4px solid var(--accent-cyan); align-items: flex-start; text-align: left;">
         <div class="visual-card-icon" style="background: rgba(6, 182, 212, 0.15); color: var(--accent-cyan);">📥</div>
         <div class="visual-card-title">Parameter (المعامل)</div>
-        <div class="visual-card-desc">The placeholder variable written when <strong>DEFINING</strong> the function.</div>
+        <div class="visual-card-desc">The placeholder variable written when <strong>DEFINING</strong> the function.
+        </div>
         <div class="visual-card-code">function greet(<span style="color:#22d3ee;font-weight:bold;">name</span>)</div>
         <div class="ar" style="font-size: 13px; color: var(--text-dim); margin-top: 12px; line-height: 1.6;">
           <strong>مثل:</strong> الفراغات المطبوعة في الاستمارة (أماكن محجوزة لبيانات ستأتي لاحقاً).
         </div>
       </div>
-      
+
       <!-- Argument -->
-      <div class="visual-card" style="border-top: 4px solid var(--accent-emerald); align-items: flex-start; text-align: left;">
-        <div class="visual-card-icon" style="background: rgba(16, 185, 129, 0.15); color: var(--accent-emerald);">🎯</div>
+      <div class="visual-card"
+        style="border-top: 4px solid var(--accent-emerald); align-items: flex-start; text-align: left;">
+        <div class="visual-card-icon" style="background: rgba(16, 185, 129, 0.15); color: var(--accent-emerald);">🎯
+        </div>
         <div class="visual-card-title">Argument (القيمة)</div>
         <div class="visual-card-desc">The actual value passed when <strong>CALLING</strong> the function.</div>
         <div class="visual-card-code">greet(<span style="color:#34d399;font-weight:bold;">"Omar"</span>)</div>
@@ -179,18 +202,25 @@
   <div class="slide-body">
     <div class="content-text-side">
       <p class="concept-lead">
-        Let's build a function that calculates the total time for a relay race by adding the <span class="highlight">freestyle</span> and <span class="highlight">breaststroke</span> times.
+        Let's build a function that calculates the total time for a relay race by adding the <span
+          class="highlight">freestyle</span> and <span class="highlight">breaststroke</span> times.
       </p>
       <div class="arabic-clarification">
-        في هذا المثال، سننشئ دالة تستقبل زمن سباحتين مختلفتين وتجمعهما. الجميل هنا أننا نستطيع استخدام نفس الدالة لفرق مختلفة (Reusability)!
+        في هذا المثال، سننشئ دالة تستقبل زمن سباحتين مختلفتين وتجمعهما. الجميل هنا أننا نستطيع استخدام نفس الدالة لفرق
+        مختلفة (Reusability)!
       </div>
-      
+
       <div class="code-container" style="margin-top: 12px;">
         <div class="code-header">
-          <div class="code-dots"><div class="dot dot-red"></div><div class="dot dot-yellow"></div><div class="dot dot-green"></div></div>
+          <div class="code-dots">
+            <div class="dot dot-red"></div>
+            <div class="dot dot-yellow"></div>
+            <div class="dot dot-green"></div>
+          </div>
           <div class="code-lang">JavaScript — 2 Parameters</div>
         </div>
-        <pre class="code-box"><code><span class="token-kw">function</span> <span class="token-fn">sum</span><span class="token-op">(</span>freestyle, breaststroke<span class="token-op">)</span> <span class="token-op">{</span>
+        <pre
+          class="code-box"><code><span class="token-kw">function</span> <span class="token-fn">sum</span><span class="token-op">(</span>freestyle, breaststroke<span class="token-op">)</span> <span class="token-op">{</span>
   <span class="token-kw">let</span> <span class="token-var">result</span> <span class="token-op">=</span> freestyle <span class="token-op">+</span> breaststroke<span class="token-op">;</span>
   <span class="token-kw">return</span> <span class="token-var">result</span><span class="token-op">;</span>
 <span class="token-op">}</span>
@@ -204,30 +234,38 @@
     <div class="diagram-canvas">
       <svg viewBox="0 0 400 240" fill="none" xmlns="http://www.w3.org/2000/svg">
         <!-- Machine Box -->
-        <rect x="120" y="80" width="160" height="100" rx="12" fill="#1E293B" stroke="#06B6D4" stroke-width="3"/>
-        <text x="200" y="115" text-anchor="middle" fill="#FFFFFF" font-family="'Fira Code', monospace" font-size="18" font-weight="700">sum()</text>
-        <text x="200" y="140" text-anchor="middle" fill="#94A3B8" font-family="'Outfit', sans-serif" font-size="12">freestyle + breaststroke</text>
-        <rect x="160" y="150" width="80" height="20" rx="4" fill="#0E7490"/>
-        <text x="200" y="164" text-anchor="middle" fill="#FFFFFF" font-family="'Fira Code', monospace" font-size="12">return</text>
+        <rect x="120" y="80" width="160" height="100" rx="12" fill="#1E293B" stroke="#06B6D4" stroke-width="3" />
+        <text x="200" y="115" text-anchor="middle" fill="#FFFFFF" font-family="'Fira Code', monospace" font-size="18"
+          font-weight="700">sum()</text>
+        <text x="200" y="140" text-anchor="middle" fill="#94A3B8" font-family="'Outfit', sans-serif"
+          font-size="12">freestyle + breaststroke</text>
+        <rect x="160" y="150" width="80" height="20" rx="4" fill="#0E7490" />
+        <text x="200" y="164" text-anchor="middle" fill="#FFFFFF" font-family="'Fira Code', monospace"
+          font-size="12">return</text>
 
         <!-- Inputs (Arguments) -->
         <!-- Arg 1 -->
-        <rect x="30" y="60" width="60" height="30" rx="6" fill="#065F46" stroke="#10B981" stroke-width="2"/>
-        <text x="60" y="80" text-anchor="middle" fill="#A7F3D0" font-family="'Fira Code', monospace" font-size="14" font-weight="700">39.5</text>
-        <path d="M 90 75 L 130 90" stroke="#10B981" stroke-width="2" stroke-dasharray="4 2"/>
+        <rect x="30" y="60" width="60" height="30" rx="6" fill="#065F46" stroke="#10B981" stroke-width="2" />
+        <text x="60" y="80" text-anchor="middle" fill="#A7F3D0" font-family="'Fira Code', monospace" font-size="14"
+          font-weight="700">39.5</text>
+        <path d="M 90 75 L 130 90" stroke="#10B981" stroke-width="2" stroke-dasharray="4 2" />
         <!-- Arg 2 -->
-        <rect x="30" y="100" width="60" height="30" rx="6" fill="#065F46" stroke="#10B981" stroke-width="2"/>
-        <text x="60" y="120" text-anchor="middle" fill="#A7F3D0" font-family="'Fira Code', monospace" font-size="14" font-weight="700">60.5</text>
-        <path d="M 90 115 L 120 115" stroke="#10B981" stroke-width="2" stroke-dasharray="4 2"/>
+        <rect x="30" y="100" width="60" height="30" rx="6" fill="#065F46" stroke="#10B981" stroke-width="2" />
+        <text x="60" y="120" text-anchor="middle" fill="#A7F3D0" font-family="'Fira Code', monospace" font-size="14"
+          font-weight="700">60.5</text>
+        <path d="M 90 115 L 120 115" stroke="#10B981" stroke-width="2" stroke-dasharray="4 2" />
 
-        <text x="60" y="45" text-anchor="middle" fill="#94A3B8" font-family="'Outfit', sans-serif" font-size="12">Arguments</text>
+        <text x="60" y="45" text-anchor="middle" fill="#94A3B8" font-family="'Outfit', sans-serif"
+          font-size="12">Arguments</text>
 
         <!-- Output (Returned Value) -->
-        <path d="M 280 130 L 320 130" stroke="#F59E0B" stroke-width="3" stroke-dasharray="4 2"/>
-        <polygon points="320,125 330,130 320,135" fill="#F59E0B"/>
-        <rect x="330" y="110" width="60" height="40" rx="6" fill="#78350F" stroke="#F59E0B" stroke-width="2"/>
-        <text x="360" y="136" text-anchor="middle" fill="#FDE68A" font-family="'Fira Code', monospace" font-size="18" font-weight="700">100</text>
-        <text x="360" y="95" text-anchor="middle" fill="#94A3B8" font-family="'Outfit', sans-serif" font-size="12">Returned</text>
+        <path d="M 280 130 L 320 130" stroke="#F59E0B" stroke-width="3" stroke-dasharray="4 2" />
+        <polygon points="320,125 330,130 320,135" fill="#F59E0B" />
+        <rect x="330" y="110" width="60" height="40" rx="6" fill="#78350F" stroke="#F59E0B" stroke-width="2" />
+        <text x="360" y="136" text-anchor="middle" fill="#FDE68A" font-family="'Fira Code', monospace" font-size="18"
+          font-weight="700">100</text>
+        <text x="360" y="95" text-anchor="middle" fill="#94A3B8" font-family="'Outfit', sans-serif"
+          font-size="12">Returned</text>
       </svg>
     </div>
   </div>
@@ -243,27 +281,42 @@
     </div>
     <div class="slide-category-pill">Flow Tracing</div>
   </div>
-  
+
   <div class="slide-body full-width">
-    <div class="visual-card" style="padding: 24px; text-align: left; align-items: stretch; border-color: var(--accent-pink);">
-      <h3 style="font-size: 18px; font-weight: 800; color: var(--accent-pink); margin-bottom: 12px;">Step-by-Step Execution</h3>
+    <div class="visual-card"
+      style="padding: 24px; text-align: left; align-items: stretch; border-color: var(--accent-pink);">
+      <h3 style="font-size: 18px; font-weight: 800; color: var(--accent-pink); margin-bottom: 12px;">Step-by-Step
+        Execution</h3>
       <p style="font-size: 14px; color: #cbd5e1; margin-bottom: 20px;" class="ar">
-        الكمبيوتر لا ينفذ الكود بشكل عشوائي، بل يتبع خريطة تدفق دقيقة جداً. إليك ما يحدث خلف الكواليس عند تشغيل كود السباحة:
+        الكمبيوتر لا ينفذ الكود بشكل عشوائي، بل يتبع خريطة تدفق دقيقة جداً. إليك ما يحدث خلف الكواليس عند تشغيل كود
+        السباحة:
       </p>
-      
+
       <ol style="margin-left: 20px; font-size: 15px; color: #f8fafc; line-height: 1.8; font-family: var(--font-body);">
-        <li><span style="color: var(--accent-cyan); font-weight: bold;">Definition:</span> The computer reads the <code>function sum() { ... }</code> block and saves it in memory. It does <strong>NOT</strong> run it yet.</li>
-        <li><span style="color: var(--accent-emerald); font-weight: bold;">Call Triggered:</span> When it reaches <code>sum(39.5, 60.5)</code>, it jumps to the function.</li>
-        <li><span style="color: var(--accent-amber); font-weight: bold;">Argument Mapping:</span> <code>39.5</code> is poured into the <code>freestyle</code> parameter, and <code>60.5</code> into <code>breaststroke</code>.</li>
-        <li><span style="color: var(--accent-purple); font-weight: bold;">Calculation:</span> <code>result = 39.5 + 60.5</code> (result becomes 100).</li>
-        <li><span style="color: var(--accent-pink); font-weight: bold;">The Return:</span> The <code>return result;</code> command actively shoots the number <code>100</code> out of the function, back to where it was called.</li>
-        <li><span style="color: var(--accent-cyan); font-weight: bold;">Storage:</span> The returned <code>100</code> is assigned into the variable <code>teamRed</code>.</li>
+        <li><span style="color: var(--accent-cyan); font-weight: bold;">Definition:</span> The computer reads the
+          <code>function sum() { ... }</code> block and saves it in memory. It does <strong>NOT</strong> run it yet.
+        </li>
+        <li><span style="color: var(--accent-emerald); font-weight: bold;">Call Triggered:</span> When it reaches
+          <code>sum(39.5, 60.5)</code>, it jumps to the function.</li>
+        <li><span style="color: var(--accent-amber); font-weight: bold;">Argument Mapping:</span> <code>39.5</code> is
+          poured into the <code>freestyle</code> parameter, and <code>60.5</code> into <code>breaststroke</code>.</li>
+        <li><span style="color: var(--accent-purple); font-weight: bold;">Calculation:</span>
+          <code>result = 39.5 + 60.5</code> (result becomes 100).</li>
+        <li><span style="color: var(--accent-pink); font-weight: bold;">The Return:</span> The
+          <code>return result;</code> command actively shoots the number <code>100</code> out of the function, back to
+          where it was called.</li>
+        <li><span style="color: var(--accent-cyan); font-weight: bold;">Storage:</span> The returned <code>100</code> is
+          assigned into the variable <code>teamRed</code>.</li>
       </ol>
 
-      <div style="margin-top: 20px; padding: 14px 20px; background: rgba(239, 68, 68, 0.1); border-left: 4px solid #ef4444; border-radius: 6px;">
-        <h4 style="font-size: 14px; font-weight: 800; color: #fecaca; margin-bottom: 6px;">🚨 CRITICAL RULE: Forgetting `return`</h4>
+      <div
+        style="margin-top: 20px; padding: 14px 20px; background: rgba(239, 68, 68, 0.1); border-left: 4px solid #ef4444; border-radius: 6px;">
+        <h4 style="font-size: 14px; font-weight: 800; color: #fecaca; margin-bottom: 6px;">🚨 CRITICAL RULE: Forgetting
+          `return`</h4>
         <p style="font-size: 13.5px; color: #f87171; line-height: 1.5;" class="ar">
-          إذا نسيت كتابة كلمة <code>return</code>، الدالة ستحسب الجمع في الذاكرة، لكنها لن تخرجه لك! سيعتبر الكمبيوتر أن الدالة لم ترجع شيئاً وسيكون الناتج <code>undefined</code>. الـ <code>return</code> هو الباب الذي تخرج منه النتيجة!
+          إذا نسيت كتابة كلمة <code>return</code>، الدالة ستحسب الجمع في الذاكرة، لكنها لن تخرجه لك! سيعتبر الكمبيوتر أن
+          الدالة لم ترجع شيئاً وسيكون الناتج <code>undefined</code>. الـ <code>return</code> هو الباب الذي تخرج منه
+          النتيجة!
         </p>
       </div>
     </div>
@@ -284,19 +337,22 @@
   <div class="slide-body">
     <div class="content-text-side">
       <p class="concept-lead">
-        Functions are not limited to 2 parameters! You can add as many as your logic requires. Let's add <span class="highlight">backstroke</span>.
+        Functions are not limited to 2 parameters! You can add as many as your logic requires. Let's add <span
+          class="highlight">backstroke</span>.
       </p>
       <div class="arabic-clarification">
-        يمكن للدالة أن تستقبل 3 معطيات أو أكثر. سنقوم الآن بترقية الدالة لحساب أزمنة ثلاثة سباحين. ونرى سحر البرمجة (Reusability) باستدعاء نفس الدالة لثلاثة فرق مختلفة!
+        يمكن للدالة أن تستقبل 3 معطيات أو أكثر. سنقوم الآن بترقية الدالة لحساب أزمنة ثلاثة سباحين. ونرى سحر البرمجة
+        (Reusability) باستدعاء نفس الدالة لثلاثة فرق مختلفة!
       </div>
-      
+
       <div class="think-card" style="margin-top: 16px;">
         <div class="think-badge">🛑 THINK</div>
         <div class="think-question">What happens if we pass 2 arguments to a function expecting 3?</div>
         <button class="think-btn-reveal"><span>🤔</span> Reveal</button>
         <div class="revealed-answer">
           <p style="font-size: 13px; color: var(--text-muted);" class="ar">
-            المعامل الثالث سيكون <code>undefined</code>، وعند محاولة جمعه مع أرقام، ستنهار المعادلة ويصبح الناتج <code>NaN</code> (Not a Number)! يجب أن يتطابق عدد القيم مع عدد المعاملات قدر الإمكان.
+            المعامل الثالث سيكون <code>undefined</code>، وعند محاولة جمعه مع أرقام، ستنهار المعادلة ويصبح الناتج
+            <code>NaN</code> (Not a Number)! يجب أن يتطابق عدد القيم مع عدد المعاملات قدر الإمكان.
           </p>
         </div>
       </div>
@@ -305,10 +361,15 @@
     <div class="visual-card" style="align-items: stretch; text-align: left; padding: 20px;">
       <div class="code-container">
         <div class="code-header">
-          <div class="code-dots"><div class="dot dot-red"></div><div class="dot dot-yellow"></div><div class="dot dot-green"></div></div>
+          <div class="code-dots">
+            <div class="dot dot-red"></div>
+            <div class="dot dot-yellow"></div>
+            <div class="dot dot-green"></div>
+          </div>
           <div class="code-lang">JavaScript — 3 Parameters</div>
         </div>
-        <pre class="code-box"><code><span class="token-kw">function</span> <span class="token-fn">sum</span><span class="token-op">(</span>freestyle, breaststroke, backstroke<span class="token-op">)</span> <span class="token-op">{</span>
+        <pre
+          class="code-box"><code><span class="token-kw">function</span> <span class="token-fn">sum</span><span class="token-op">(</span>freestyle, breaststroke, backstroke<span class="token-op">)</span> <span class="token-op">{</span>
   <span class="token-kw">let</span> <span class="token-var">time</span> <span class="token-op">=</span> freestyle <span class="token-op">+</span> breaststroke <span class="token-op">+</span> backstroke<span class="token-op">;</span>
   <span class="token-kw">return</span> <span class="token-var">time</span><span class="token-op">;</span>
 <span class="token-op">}</span>
@@ -339,18 +400,21 @@
         You don't have to pass raw numbers. Pass <span class="highlight">variables</span> instead!
       </p>
       <div class="arabic-clarification">
-        لكي نجعل برنامجنا ديناميكياً 100%، نقوم بتمرير أسماء المتغيرات إلى الدوال. الكمبيوتر سيقرأ ما بداخل المتغير ويمرره.
+        لكي نجعل برنامجنا ديناميكياً 100%، نقوم بتمرير أسماء المتغيرات إلى الدوال. الكمبيوتر سيقرأ ما بداخل المتغير
+        ويمرره.
         كما نتعرف هنا على دالة جاهزة في اللغة اسمها <code>Math.min()</code> وظيفتها استخراج أصغر رقم من مجموعة أرقام.
       </div>
 
       <div class="cards-grid-2" style="margin-top: 16px;">
-        <div class="visual-card" style="border-color: rgba(239, 68, 68, 0.4); text-align: left; align-items: flex-start; padding: 12px;">
+        <div class="visual-card"
+          style="border-color: rgba(239, 68, 68, 0.4); text-align: left; align-items: flex-start; padding: 12px;">
           <div style="font-size: 11px; font-weight: 800; color: var(--accent-crimson);">❌ STATIC (BAD)</div>
           <div class="code-box" style="width: 100%; font-size: 12px; margin-top: 6px;">
             Math.min(158.5, 160, 160.5);
           </div>
         </div>
-        <div class="visual-card" style="border-color: rgba(16, 185, 129, 0.4); text-align: left; align-items: flex-start; padding: 12px;">
+        <div class="visual-card"
+          style="border-color: rgba(16, 185, 129, 0.4); text-align: left; align-items: flex-start; padding: 12px;">
           <div style="font-size: 11px; font-weight: 800; color: var(--accent-emerald);">✓ DYNAMIC (PRO)</div>
           <div class="code-box" style="width: 100%; font-size: 12px; margin-top: 6px;">
             Math.min(teamRed, teamBlue, ...);
@@ -362,10 +426,15 @@
     <div class="visual-card" style="align-items: stretch; text-align: left; padding: 24px;">
       <div class="code-container">
         <div class="code-header">
-          <div class="code-dots"><div class="dot dot-red"></div><div class="dot dot-yellow"></div><div class="dot dot-green"></div></div>
+          <div class="code-dots">
+            <div class="dot dot-red"></div>
+            <div class="dot dot-yellow"></div>
+            <div class="dot dot-green"></div>
+          </div>
           <div class="code-lang">JavaScript — Dynamic Find</div>
         </div>
-        <pre class="code-box"><code><span class="token-comment">// We already have variables from the previous slide!</span>
+        <pre
+          class="code-box"><code><span class="token-comment">// We already have variables from the previous slide!</span>
 <span class="token-comment">// teamRed = 158.5, teamBlue = 160, teamGreen = 160.5</span>
 
 <span class="token-comment">// Use Math.min to find the fastest (smallest) time</span>
@@ -374,7 +443,8 @@
 <span class="token-comment">// Concatenate text and number</span>
 <span class="token-fn">console</span><span class="token-op">.</span><span class="token-fn">log</span><span class="token-op">(</span><span class="token-str">"The fastest time is "</span> <span class="token-op">+</span> <span class="token-var">fastest</span><span class="token-op">)</span><span class="token-op">;</span></code></pre>
       </div>
-      <div class="answer-output-badge" style="margin-top: 12px; align-self: flex-start;">Output: The fastest time is 158.5</div>
+      <div class="answer-output-badge" style="margin-top: 12px; align-self: flex-start;">Output: The fastest time is
+        158.5</div>
     </div>
   </div>
 </article>
@@ -394,40 +464,50 @@
     </div>
     <div class="slide-category-pill">Visual Planning</div>
   </div>
-  
+
   <div class="slide-body">
     <div class="content-text-side">
       <p class="concept-lead">
-        A <span class="highlight">Flowchart</span> is a visual map of a program's logic. We use it to plan <strong>BEFORE</strong> writing code!
+        A <span class="highlight">Flowchart</span> is a visual map of a program's logic. We use it to plan
+        <strong>BEFORE</strong> writing code!
       </p>
       <div class="arabic-clarification">
-        مثلما يرسم المهندس خريطة للمبنى قبل بنائه، يرسم المبرمج خريطة (Flowchart) ليوضح كيف تتدفق البيانات وأين تُتخذ القرارات (هل نذهب يميناً أم يساراً؟).
+        مثلما يرسم المهندس خريطة للمبنى قبل بنائه، يرسم المبرمج خريطة (Flowchart) ليوضح كيف تتدفق البيانات وأين تُتخذ
+        القرارات (هل نذهب يميناً أم يساراً؟).
       </div>
-      
+
       <div style="margin-top: 20px;">
-        <h3 style="font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px;">The 3 Core Shapes</h3>
-        
+        <h3
+          style="font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px;">
+          The 3 Core Shapes</h3>
+
         <div style="display: flex; flex-direction: column; gap: 12px;">
           <!-- Shape 1: Diamond -->
-          <div style="display: flex; align-items: center; gap: 16px; background: rgba(245, 158, 11, 0.1); padding: 12px; border-radius: 8px; border: 1px solid rgba(245, 158, 11, 0.3);">
-            <div style="width: 32px; height: 32px; background: #F59E0B; transform: rotate(45deg); flex-shrink: 0;"></div>
+          <div
+            style="display: flex; align-items: center; gap: 16px; background: rgba(245, 158, 11, 0.1); padding: 12px; border-radius: 8px; border: 1px solid rgba(245, 158, 11, 0.3);">
+            <div style="width: 32px; height: 32px; background: #F59E0B; transform: rotate(45deg); flex-shrink: 0;">
+            </div>
             <div>
               <div style="font-weight: 700; color: #FCD34D;">Decision (المُعَيّن)</div>
-              <div style="font-size: 13px; color: #cbd5e1;" class="ar">يمثل سؤال / شرط <code>if</code>. يخرج منه دائماً سهمان: نعم (True) ولا (False).</div>
+              <div style="font-size: 13px; color: #cbd5e1;" class="ar">يمثل سؤال / شرط <code>if</code>. يخرج منه دائماً
+                سهمان: نعم (True) ولا (False).</div>
             </div>
           </div>
-          
+
           <!-- Shape 2: Rectangle -->
-          <div style="display: flex; align-items: center; gap: 16px; background: rgba(16, 185, 129, 0.1); padding: 12px; border-radius: 8px; border: 1px solid rgba(16, 185, 129, 0.3);">
+          <div
+            style="display: flex; align-items: center; gap: 16px; background: rgba(16, 185, 129, 0.1); padding: 12px; border-radius: 8px; border: 1px solid rgba(16, 185, 129, 0.3);">
             <div style="width: 40px; height: 26px; background: #10B981; flex-shrink: 0;"></div>
             <div>
               <div style="font-weight: 700; color: #6EE7B7;">Process (المستطيل)</div>
-              <div style="font-size: 13px; color: #cbd5e1;" class="ar">يمثل عملية: كود رياضي، طباعة <code>console.log</code>، أو تخزين قيمة.</div>
+              <div style="font-size: 13px; color: #cbd5e1;" class="ar">يمثل عملية: كود رياضي، طباعة
+                <code>console.log</code>، أو تخزين قيمة.</div>
             </div>
           </div>
-          
+
           <!-- Shape 3: Arrow -->
-          <div style="display: flex; align-items: center; gap: 16px; background: rgba(6, 182, 212, 0.1); padding: 12px; border-radius: 8px; border: 1px solid rgba(6, 182, 212, 0.3);">
+          <div
+            style="display: flex; align-items: center; gap: 16px; background: rgba(6, 182, 212, 0.1); padding: 12px; border-radius: 8px; border: 1px solid rgba(6, 182, 212, 0.3);">
             <div style="font-size: 24px; color: #06B6D4; font-weight: bold;">➔</div>
             <div>
               <div style="font-weight: 700; color: #67E8F9;">Arrows (الأسهم)</div>
@@ -437,45 +517,52 @@
         </div>
       </div>
     </div>
-    
+
     <!-- Diagram: Simple Flowchart -->
     <div class="diagram-canvas">
       <svg viewBox="0 0 300 360" fill="none" xmlns="http://www.w3.org/2000/svg">
         <!-- Start -->
-        <rect x="100" y="20" width="100" height="30" rx="15" fill="#334155" stroke="#94A3B8" stroke-width="2"/>
-        <text x="150" y="40" text-anchor="middle" fill="#F8FAFC" font-family="'Outfit', sans-serif" font-size="12" font-weight="700">Start</text>
-        
-        <path d="M 150 50 L 150 80" stroke="#94A3B8" stroke-width="2"/>
-        <polygon points="150,85 145,75 155,75" fill="#94A3B8"/>
-        
+        <rect x="100" y="20" width="100" height="30" rx="15" fill="#334155" stroke="#94A3B8" stroke-width="2" />
+        <text x="150" y="40" text-anchor="middle" fill="#F8FAFC" font-family="'Outfit', sans-serif" font-size="12"
+          font-weight="700">Start</text>
+
+        <path d="M 150 50 L 150 80" stroke="#94A3B8" stroke-width="2" />
+        <polygon points="150,85 145,75 155,75" fill="#94A3B8" />
+
         <!-- Decision -->
-        <polygon points="150,85 220,135 150,185 80,135" fill="#1E293B" stroke="#F59E0B" stroke-width="3"/>
-        <text x="150" y="140" text-anchor="middle" fill="#FBBF24" font-family="'Fira Code', monospace" font-size="14" font-weight="700">is Sunny?</text>
-        
+        <polygon points="150,85 220,135 150,185 80,135" fill="#1E293B" stroke="#F59E0B" stroke-width="3" />
+        <text x="150" y="140" text-anchor="middle" fill="#FBBF24" font-family="'Fira Code', monospace" font-size="14"
+          font-weight="700">is Sunny?</text>
+
         <!-- True Branch -->
-        <path d="M 220 135 L 260 135 L 260 210" stroke="#10B981" stroke-width="2"/>
-        <polygon points="260,215 255,205 265,205" fill="#10B981"/>
-        <text x="240" y="125" fill="#10B981" font-family="'Outfit', sans-serif" font-size="12" font-weight="700">Yes (True)</text>
-        
-        <rect x="210" y="215" width="100" height="40" fill="#064E3B" stroke="#10B981" stroke-width="2"/>
-        <text x="260" y="235" text-anchor="middle" fill="#A7F3D0" font-family="'Outfit', sans-serif" font-size="11">Play Football</text>
-        
+        <path d="M 220 135 L 260 135 L 260 210" stroke="#10B981" stroke-width="2" />
+        <polygon points="260,215 255,205 265,205" fill="#10B981" />
+        <text x="240" y="125" fill="#10B981" font-family="'Outfit', sans-serif" font-size="12" font-weight="700">Yes
+          (True)</text>
+
+        <rect x="210" y="215" width="100" height="40" fill="#064E3B" stroke="#10B981" stroke-width="2" />
+        <text x="260" y="235" text-anchor="middle" fill="#A7F3D0" font-family="'Outfit', sans-serif" font-size="11">Play
+          Football</text>
+
         <!-- False Branch -->
-        <path d="M 80 135 L 40 135 L 40 210" stroke="#EF4444" stroke-width="2"/>
-        <polygon points="40,215 35,205 45,205" fill="#EF4444"/>
-        <text x="45" y="125" fill="#EF4444" font-family="'Outfit', sans-serif" font-size="12" font-weight="700">No (False)</text>
-        
-        <rect x="-10" y="215" width="100" height="40" fill="#450A0A" stroke="#EF4444" stroke-width="2"/>
-        <text x="40" y="235" text-anchor="middle" fill="#FECACA" font-family="'Outfit', sans-serif" font-size="11">Read Book</text>
-        
+        <path d="M 80 135 L 40 135 L 40 210" stroke="#EF4444" stroke-width="2" />
+        <polygon points="40,215 35,205 45,205" fill="#EF4444" />
+        <text x="45" y="125" fill="#EF4444" font-family="'Outfit', sans-serif" font-size="12" font-weight="700">No
+          (False)</text>
+
+        <rect x="-10" y="215" width="100" height="40" fill="#450A0A" stroke="#EF4444" stroke-width="2" />
+        <text x="40" y="235" text-anchor="middle" fill="#FECACA" font-family="'Outfit', sans-serif" font-size="11">Read
+          Book</text>
+
         <!-- Rejoin -->
-        <path d="M 260 255 L 260 290 L 155 290" stroke="#94A3B8" stroke-width="2"/>
-        <path d="M 40 255 L 40 290 L 145 290" stroke="#94A3B8" stroke-width="2"/>
-        <polygon points="150,295 145,285 155,285" fill="#94A3B8"/>
-        
+        <path d="M 260 255 L 260 290 L 155 290" stroke="#94A3B8" stroke-width="2" />
+        <path d="M 40 255 L 40 290 L 145 290" stroke="#94A3B8" stroke-width="2" />
+        <polygon points="150,295 145,285 155,285" fill="#94A3B8" />
+
         <!-- End -->
-        <rect x="100" y="295" width="100" height="30" rx="15" fill="#334155" stroke="#94A3B8" stroke-width="2"/>
-        <text x="150" y="315" text-anchor="middle" fill="#F8FAFC" font-family="'Outfit', sans-serif" font-size="12" font-weight="700">End</text>
+        <rect x="100" y="295" width="100" height="30" rx="15" fill="#334155" stroke="#94A3B8" stroke-width="2" />
+        <text x="150" y="315" text-anchor="middle" fill="#F8FAFC" font-family="'Outfit', sans-serif" font-size="12"
+          font-weight="700">End</text>
       </svg>
     </div>
   </div>
@@ -491,31 +578,37 @@
     </div>
     <div class="slide-category-pill">Bridging the Gap</div>
   </div>
-  
+
   <div class="slide-body full-width">
     <div class="cards-grid-2">
       <!-- The Diagram -->
-      <div class="visual-card" style="padding: 0; background: transparent; border: none; align-items: center; justify-content: center;">
+      <div class="visual-card"
+        style="padding: 0; background: transparent; border: none; align-items: center; justify-content: center;">
         <svg viewBox="0 0 300 240" fill="none" xmlns="http://www.w3.org/2000/svg" style="max-height: 220px;">
           <!-- Decision -->
-          <polygon points="150,20 230,70 150,120 70,70" fill="#1E293B" stroke="#F59E0B" stroke-width="3"/>
-          <text x="150" y="75" text-anchor="middle" fill="#FBBF24" font-family="'Fira Code', monospace" font-size="14" font-weight="700">score &gt;= 50</text>
-          
+          <polygon points="150,20 230,70 150,120 70,70" fill="#1E293B" stroke="#F59E0B" stroke-width="3" />
+          <text x="150" y="75" text-anchor="middle" fill="#FBBF24" font-family="'Fira Code', monospace" font-size="14"
+            font-weight="700">score &gt;= 50</text>
+
           <!-- True Branch -->
-          <path d="M 230 70 L 260 70 L 260 130" stroke="#10B981" stroke-width="2"/>
-          <polygon points="260,135 255,125 265,125" fill="#10B981"/>
-          <text x="240" y="60" fill="#10B981" font-family="'Outfit', sans-serif" font-size="12" font-weight="700">True</text>
-          
-          <rect x="200" y="135" width="120" height="40" fill="#064E3B" stroke="#10B981" stroke-width="2"/>
-          <text x="260" y="160" text-anchor="middle" fill="#A7F3D0" font-family="'Fira Code', monospace" font-size="12">console.log("Pass")</text>
-          
+          <path d="M 230 70 L 260 70 L 260 130" stroke="#10B981" stroke-width="2" />
+          <polygon points="260,135 255,125 265,125" fill="#10B981" />
+          <text x="240" y="60" fill="#10B981" font-family="'Outfit', sans-serif" font-size="12"
+            font-weight="700">True</text>
+
+          <rect x="200" y="135" width="120" height="40" fill="#064E3B" stroke="#10B981" stroke-width="2" />
+          <text x="260" y="160" text-anchor="middle" fill="#A7F3D0" font-family="'Fira Code', monospace"
+            font-size="12">console.log("Pass")</text>
+
           <!-- False Branch -->
-          <path d="M 70 70 L 40 70 L 40 130" stroke="#EF4444" stroke-width="2"/>
-          <polygon points="40,135 35,125 45,125" fill="#EF4444"/>
-          <text x="45" y="60" fill="#EF4444" font-family="'Outfit', sans-serif" font-size="12" font-weight="700">False</text>
-          
-          <rect x="-20" y="135" width="120" height="40" fill="#450A0A" stroke="#EF4444" stroke-width="2"/>
-          <text x="40" y="160" text-anchor="middle" fill="#FECACA" font-family="'Fira Code', monospace" font-size="12">console.log("Fail")</text>
+          <path d="M 70 70 L 40 70 L 40 130" stroke="#EF4444" stroke-width="2" />
+          <polygon points="40,135 35,125 45,125" fill="#EF4444" />
+          <text x="45" y="60" fill="#EF4444" font-family="'Outfit', sans-serif" font-size="12"
+            font-weight="700">False</text>
+
+          <rect x="-20" y="135" width="120" height="40" fill="#450A0A" stroke="#EF4444" stroke-width="2" />
+          <text x="40" y="160" text-anchor="middle" fill="#FECACA" font-family="'Fira Code', monospace"
+            font-size="12">console.log("Fail")</text>
         </svg>
       </div>
 
@@ -523,7 +616,11 @@
       <div class="visual-card" style="align-items: stretch; text-align: left; padding: 24px;">
         <div class="code-container">
           <div class="code-header">
-            <div class="code-dots"><div class="dot dot-red"></div><div class="dot dot-yellow"></div><div class="dot dot-green"></div></div>
+            <div class="code-dots">
+              <div class="dot dot-red"></div>
+              <div class="dot dot-yellow"></div>
+              <div class="dot dot-green"></div>
+            </div>
             <div class="code-lang">1:1 Translation to Code</div>
           </div>
           <pre class="code-box"><code><span class="token-comment">// The Diamond (Decision)</span>
@@ -561,9 +658,10 @@
         This combination is one of the most powerful and common patterns in all of software engineering!
       </p>
       <div class="arabic-clarification">
-        تجميع القائمة (Array) مع حلقة التكرار (for...of) مع الشرط (if) مع العداد (count++) يُستخدم لعدّ أو تصفية بيانات تحقق شرطاً معيناً. سنعد هنا المتطوعين الذين أجابوا بـ "Yes".
+        تجميع القائمة (Array) مع حلقة التكرار (for...of) مع الشرط (if) مع العداد (count++) يُستخدم لعدّ أو تصفية بيانات
+        تحقق شرطاً معيناً. سنعد هنا المتطوعين الذين أجابوا بـ "Yes".
       </div>
-      
+
       <ol style="margin-top: 16px; margin-left: 20px; font-size: 14.5px; color: #cbd5e1; line-height: 1.6;">
         <li>Start a counter at 0.</li>
         <li>Loop over every element in the array one by one.</li>
@@ -575,10 +673,15 @@
     <div class="visual-card" style="align-items: stretch; text-align: left; padding: 24px;">
       <div class="code-container">
         <div class="code-header">
-          <div class="code-dots"><div class="dot dot-red"></div><div class="dot dot-yellow"></div><div class="dot dot-green"></div></div>
+          <div class="code-dots">
+            <div class="dot dot-red"></div>
+            <div class="dot dot-yellow"></div>
+            <div class="dot dot-green"></div>
+          </div>
           <div class="code-lang">JavaScript — The Counter Pattern</div>
         </div>
-        <pre class="code-box"><code><span class="token-kw">let</span> <span class="token-var">volunteerList</span> <span class="token-op">=</span> <span class="token-op">[</span><span class="token-str">"Yes"</span>, <span class="token-str">"No"</span>, <span class="token-str">"Yes"</span>, <span class="token-str">"Yes"</span>, <span class="token-str">"No"</span><span class="token-op">]</span><span class="token-op">;</span>
+        <pre
+          class="code-box"><code><span class="token-kw">let</span> <span class="token-var">volunteerList</span> <span class="token-op">=</span> <span class="token-op">[</span><span class="token-str">"Yes"</span>, <span class="token-str">"No"</span>, <span class="token-str">"Yes"</span>, <span class="token-str">"Yes"</span>, <span class="token-str">"No"</span><span class="token-op">]</span><span class="token-op">;</span>
 <span class="token-kw">let</span> <span class="token-var">count</span> <span class="token-op">=</span> <span class="token-num">0</span><span class="token-op">;</span>
 
 <span class="token-kw">for</span> <span class="token-op">(</span><span class="token-kw">let</span> <span class="token-var">day</span> <span class="token-kw">of</span> <span class="token-var">volunteerList</span><span class="token-op">)</span> <span class="token-op">{</span>
@@ -609,13 +712,15 @@
         A <span class="highlight">Nested if</span> is an if statement placed inside another if statement.
       </p>
       <div class="arabic-clarification">
-        نستخدمها عندما نحتاج لاتخاذ قرار، ثم نحتاج لاتخاذ قرار "آخر" مبني على نتيجة القرار الأول. (الوصول للشرط الداخلي مستحيل إلا إذا كان الشرط الخارجي صحيحاً).
+        نستخدمها عندما نحتاج لاتخاذ قرار، ثم نحتاج لاتخاذ قرار "آخر" مبني على نتيجة القرار الأول. (الوصول للشرط الداخلي
+        مستحيل إلا إذا كان الشرط الخارجي صحيحاً).
       </div>
-      
+
       <div class="think-card" style="margin-top: 16px;">
         <div class="think-badge">🛑 CHALLENGE: TRACE THE LOGIC</div>
         <div class="think-question">What is printed if passed = true and score = 80?</div>
-        <p style="font-size: 13px; color: var(--text-muted);">Look at the code on the right. Trace it from top to bottom.</p>
+        <p style="font-size: 13px; color: var(--text-muted);">Look at the code on the right. Trace it from top to
+          bottom.</p>
         <button class="think-btn-reveal"><span>🤔</span> Reveal</button>
         <div class="revealed-answer">
           <div class="answer-lead">✓ Step by step trace:</div>
@@ -627,11 +732,15 @@
         </div>
       </div>
     </div>
-    
+
     <div class="visual-card" style="align-items: stretch; text-align: left; padding: 24px;">
       <div class="code-container">
         <div class="code-header">
-          <div class="code-dots"><div class="dot dot-red"></div><div class="dot dot-yellow"></div><div class="dot dot-green"></div></div>
+          <div class="code-dots">
+            <div class="dot dot-red"></div>
+            <div class="dot dot-yellow"></div>
+            <div class="dot dot-green"></div>
+          </div>
           <div class="code-lang">JavaScript — Nested IF</div>
         </div>
         <pre class="code-box"><code><span class="token-comment">// OUTER CONDITION</span>

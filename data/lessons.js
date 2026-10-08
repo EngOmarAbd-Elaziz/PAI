@@ -281,5 +281,264 @@ console.log(count);` },
         { title: '4. String vs Variable', desc: 'sum("teamRed") passes text, sum(teamRed) passes the actual variable value.' }
       ]}
     ]
+  },
+  {
+    id: 'lesson-03',
+    number: '03',
+    version: 1,
+    offline: { enabled: true },
+    title: 'HTML & CSS – Part 2',
+    titleAr: 'تطوير الويب: HTML و CSS (الجزء الثاني)',
+    tag: 'Web Design',
+    tagAr: 'تصميم الويب',
+    color: 'pink',
+    icon: '🎨',
+    description: 'Master web structure with HTML and professional styling with CSS. Create interactive inputs and dynamic hover effects.',
+    descriptionAr: 'اتعلم إزاي تبني هيكل الصفحة بـ HTML وتنسقها بـ CSS. هنضيف أزرار وحقول إدخال ونتعلم تأثيرات الـ Hover الاحترافية.',
+    slideCount: 2,
+    slidesFile: 'slides/lesson-03.html',
+    handout: [
+      // ── UNIT 1: HTML REVIEW ──────────────────────────────────────────────
+      { type: 'section-heading', text: '🏗️ الوحدة الأولى: مراجعة HTML', subtext: 'العناوين، الفقرات، القوائم، والصور' },
+      
+      { type: 'concept', title: 'Headings & Paragraphs', titleAr: 'العناوين والفقرات',
+        text: 'HTML provides specific tags for structuring text. We use &lt;h1&gt; for the main title and &lt;p&gt; for standard text paragraphs.',
+        ar: 'الـ HTML بيوفرلنا وسوم (Tags) لترتيب الكلام. بنستخدم &lt;h1&gt; عشان نكتب العنوان الرئيسي، و&lt;p&gt; عشان نكتب فقرة عادية. ولازم نقفل الوسم بعد ما نخلص كتابة.' },
+      
+      { type: 'code', lang: 'html', label: 'Headings & Paragraphs Example',
+        text: `<h1>Welcome to My Website</h1>
+<p>This is a paragraph of text explaining the website.</p>` },
+      
+      { type: 'concept', title: 'Lists (ul, ol, li)', titleAr: 'القوائم',
+        text: 'Lists organize items. &lt;ul&gt; creates a bulleted list (Unordered), &lt;ol&gt; creates a numbered list (Ordered), and &lt;li&gt; represents each item inside them.',
+        ar: 'عشان نعمل قائمة بنستخدم &lt;ul&gt; لو قائمة نقطية، أو &lt;ol&gt; لو قائمة مرقمة. وكل عنصر جوة القائمة بنحطه جوة &lt;li&gt;.' },
+      
+      { type: 'code', lang: 'html', label: 'Sports Tournament List Example',
+        text: `<ul>
+  <li>Football Match</li>
+  <li>Basketball Finals</li>
+  <li>Tennis Championship</li>
+</ul>` },
+      
+      { type: 'concept', title: 'Images', titleAr: 'إضافة الصور',
+        text: 'The &lt;img&gt; tag is used to embed images. It requires the "src" attribute to specify the image path. It does NOT have a closing tag.',
+        ar: 'بستخدم وسم &lt;img&gt; عشان أحط صورة. الخاصية src بتحدد مكان الصورة. خلي بالك إن وسم الصورة ملوش وسم إغلاق (Self-closing).' },
+      
+      { type: 'code', lang: 'html', label: 'Image Tag Example',
+        text: `<img src="sports.png">` },
+      
+      { type: 'rule', color: 'cyan', text: 'جرب بنفسك: اكتب كود لصفحة ويب بسيطة تحتوي على عنوان رئيسي "أهدافي"، وقائمة نقطية بهدفين، وصورة تعبر عن النجاح.' },
+
+      // ── UNIT 2: TARGETING ELEMENTS WITH HTML AND CSS ─────────────────────
+      { type: 'section-heading', text: '🎯 الوحدة الثانية: تحديد وتنسيق العناصر', subtext: 'كيفية ربط الـ HTML بالـ CSS' },
+      
+      { type: 'concept', title: 'HTML vs CSS', titleAr: 'الهيكل مقابل المظهر',
+        text: 'HTML builds the structure (like a house frame), while CSS adds style (paint, furniture).',
+        ar: 'الـ HTML بيبني هيكل الصفحة الأساسي، لكن الـ CSS هو اللي بيضيف الألوان والتنسيقات ويخلي شكلها حلو.' },
+      
+      { type: 'concept', title: 'Selector, Property, Value', titleAr: 'أجزاء الـ CSS',
+        text: 'A CSS rule consists of a Selector (what to style), a Property (what to change), and a Value (the new style).',
+        ar: 'أي كود CSS بيتكون من: المُحدد (Selector) عشان نختار العنصر، الخاصية (Property) زي اللون، والقيمة (Value) زي اللون الأحمر.' },
+
+      { type: 'code', lang: 'css', label: 'CSS Anatomy',
+        text: `p {
+  color: red; /* color is Property, red is Value */
+  background-color: yellow;
+}` },
+
+      { type: 'concept', title: 'Classes & The Span Tag', titleAr: 'الفئات ووسم span',
+        text: 'A "class" is a label given to HTML elements to style them specifically. &lt;span&gt; is used to wrap a small piece of text inside a line to style it.',
+        ar: 'الـ class هو اسم مميز بنديه للعنصر عشان ننسقه في الـ CSS (وبنكتب قبله نقطة). وسم &lt;span&gt; بنستخدمه لو عايزين نلون كلمة واحدة بس جوة سطر.' },
+
+      { type: 'code', lang: 'html', label: 'Using span and class in HTML',
+        text: `<p>I love the <span class="sea">sea</span> and the <span class="mountain">mountain</span>.</p>` },
+
+      { type: 'code', lang: 'css', label: 'Styling classes in CSS',
+        text: `/* Notice the dot (.) before the class name! */
+.sea {
+  color: blue;
+}
+.mountain {
+  color: green;
+}` },
+      
+      { type: 'rule', color: 'cyan', text: 'جرب بنفسك: اكتب فقرة عن فصل الصيف، واستخدم <span> لتلوين كلمة "الشمس" باللون البرتقالي.' },
+
+      // ── UNIT 3: INPUTS AND BUTTONS ────────────────────────────────────────
+      { type: 'section-heading', text: '🔘 الوحدة الثالثة: حقول الإدخال والأزرار', subtext: 'إنشاء نماذج تفاعلية' },
+
+      { type: 'concept', title: 'Text Inputs & Buttons', titleAr: 'مربعات النص والأزرار',
+        text: 'We use the &lt;input&gt; tag to create form controls. type="text" creates a text box, and type="button" creates a clickable button.',
+        ar: 'بنستخدم وسم &lt;input&gt; عشان نعمل أدوات الإدخال. لو كتبنا type="text" هيعمل مربع نص، ولو كتبنا type="button" هيعمل زرار. خاصية value بتحدد الكلام اللي هيظهر على الزرار.' },
+
+      { type: 'code', lang: 'html', label: 'Survey Form Example',
+        text: `<h1>Quick Survey</h1>
+<p>What is your favorite color?</p>
+<input type="text">
+<input type="button" value="Submit">` },
+
+      { type: 'rule', color: 'amber', text: 'تنبيه هام: هذا الكود يصمم شكل الزر فقط. لكي يقوم الزر بإرسال البيانات فعلياً، نحتاج إلى إضافة أوامر برمجية باستخدام JavaScript لاحقاً.' },
+
+      // ── UNIT 4: CSS REVIEW & TEXT FORMATTING ──────────────────────────────
+      { type: 'section-heading', text: '🖌️ الوحدة الرابعة: مراجعة CSS وتنسيق النصوص', subtext: 'الألوان والخطوط' },
+
+      { type: 'types-grid', types: [
+        { name: 'color', color: 'cyan', icon: 'A', desc: 'Changes text color', example: 'color: blue;' },
+        { name: 'background-color', color: 'emerald', icon: '🎨', desc: 'Changes background', example: 'background-color: yellow;' },
+        { name: 'font-size', color: 'pink', icon: '📏', desc: 'Changes text size in pixels', example: 'font-size: 24px;' },
+        { name: 'font-weight', color: 'amber', icon: 'B', desc: 'Changes text thickness', example: 'font-weight: bold;' }
+      ]},
+
+      { type: 'code', lang: 'html', label: 'Homework List (HTML)',
+        text: `<h2>Homework</h2>
+<ul>
+  <li>History Study</li>
+  <li class="blue">Math Practice</li>
+  <li>Essay</li>
+</ul>` },
+
+      { type: 'code', lang: 'css', label: 'Homework List (CSS)',
+        text: `.blue {
+  color: blue;
+  font-weight: 900;
+}` },
+
+      { type: 'rule', color: 'cyan', text: 'جرب بنفسك: قم بإنشاء عنوان <h1> وقم بتغيير حجم الخط إلى 40px والخلفية إلى اللون الأسود.' },
+
+      // ── UNIT 5: BUTTON HOVER EFFECTS ──────────────────────────────────────
+      { type: 'section-heading', text: '✨ الوحدة الخامسة: تزيين الأزرار باستخدام Hover', subtext: 'التفاعل عند مرور الفأرة' },
+
+      { type: 'concept', title: 'The :hover Pseudo-class', titleAr: 'مؤثر المرور :hover',
+        text: 'The :hover selector is used to select elements when you mouse over them. It makes web pages feel interactive and alive.',
+        ar: 'بنستخدم :hover عشان نغير شكل العنصر (زي الزرار) لما الماوس يعدي من عليه. ده بيدي حيوية للصفحة ويحسس المستخدم إن الزرار تفاعلي.' },
+
+      { type: 'code', lang: 'css', label: 'Hover Effect Example',
+        text: `/* 1. Normal state of the button */
+.btn1 {
+  background-color: gray;
+  color: white;
+}
+
+/* 2. State when mouse hovers over it */
+.btn1:hover {
+  background-color: lime;
+}` },
+
+      { type: 'rule', color: 'pink', text: 'الفرق: .btn1 هو الشكل الطبيعي اللي بيظهر دايماً. لكن .btn1:hover هو الشكل المؤقت اللي بيظهر بس لما الماوس يلمس الزرار.' },
+
+      { type: 'code', lang: 'css', label: 'Another Button Example',
+        text: `.btn2 { background-color: white; color: black; }
+.btn2:hover { background-color: yellow; }` },
+
+      { type: 'rule', color: 'cyan', text: 'جرب بنفسك: اصنع زراً كلاسيكياً يتغير لونه إلى الأحمر عند مرور الماوس عليه.' },
+
+      // ── UNIT 6: CSS TRANSITIONS ───────────────────────────────────────────
+      { type: 'section-heading', text: '⏳ الوحدة السادسة: الانتقالات التدريجية (Transition)', subtext: 'حركة ناعمة واحترافية' },
+
+      { type: 'concept', title: 'Smooth Transitions', titleAr: 'الانتقال السلس',
+        text: 'The transition property allows you to change property values smoothly over a given duration (in seconds, "s").',
+        ar: 'خاصية transition بتخلي التغيير اللي بيحصل (مثلاً تغيير اللون) يحصل بالتدريج وبنعومة بدل ما يتغير فجأة. وبنحدد المدة بالثواني باستخدام حرف s.' },
+
+      { type: 'code', lang: 'css', label: 'Adding Transition to Hover',
+        text: `.btn-smooth {
+  background-color: blue;
+  transition: 2s; /* Takes 2 seconds to change */
+}
+
+.btn-smooth:hover {
+  background-color: red;
+}` },
+
+      { type: 'rule', color: 'amber', text: 'ملاحظة: بنكتب transition في الـ class الأساسي (زي .btn-smooth)، مش في الـ :hover. عشان الانتقال يشتغل واحنا بنشيل الماوس كمان!' },
+
+      // ── UNIT 7: CSS BORDERS ───────────────────────────────────────────────
+      { type: 'section-heading', text: '🔲 الوحدة السابعة: إضافة الحدود (Border)', subtext: 'تأطير العناصر' },
+
+      { type: 'concept', title: 'CSS Borders', titleAr: 'حدود العناصر',
+        text: 'The border property allows you to specify the style, width, and color of an element\'s border. Types include solid and double.',
+        ar: 'خاصية border بتعمل إطار أو برواز حوالين العنصر. بنحدد فيه 3 حاجات بالترتيب: السُمك (بالبيكسل px)، والنوع (زي solid خط واحد، أو double خطين)، واللون.' },
+
+      { type: 'code', lang: 'css', label: 'Border Examples',
+        text: `h1 {
+  border: 5px solid red; /* 5px thick, single line, red color */
+}
+
+.packing-list {
+  border: 10px double blue; /* 10px thick, double lines, blue color */
+}` },
+
+      { type: 'rule', color: 'cyan', text: 'جرب بنفسك: اصنع صندوقاً باستخدام &lt;div&gt; وضع له حداً مزدوجاً بسمك 8px ولون أخضر.' },
+
+      // ── COMMON MISTAKES ──────────────────────────────────────────────────
+      { type: 'section-heading', text: '⚠️ أخطاء شائعة — Common Mistakes', subtext: 'احذر هذه المطبات البرمجية!' },
+      { type: 'mistakes-grid', mistakes: [
+        { title: '1. نسيان الإغلاق', desc: 'نسيان إغلاق الوسوم مثل &lt;/h1&gt;، مما يؤدي إلى تطبيق التنسيق على باقي الصفحة بالخطأ.' },
+        { title: '2. نسيان النقطة في الـ class', desc: 'كتابة blue { color: blue; } بدلاً من .blue في الـ CSS. النقطة ضرورية جداً!' },
+        { title: '3. استخدام color للخلفية', desc: 'كتابة color لتلوين الخلفية بدلاً من background-color. color يغير لون النص فقط.' },
+        { title: '4. كتابة الـ transition في الـ hover', desc: 'هذا يجعل العنصر يعود لشكله الطبيعي فجأة بدون نعومة عند إبعاد الماوس.' }
+      ]},
+
+      // ── FINAL REVIEW & EXERCISES ─────────────────────────────────────────
+      { type: 'section-heading', text: '📝 المراجعة الشاملة والتطبيقات', subtext: 'اختبر فهمك لمواضيع الحصة' },
+      
+      { type: 'concept', title: '1. أسئلة الاختيار من متعدد (MCQ)', titleAr: '', text: `
+        <ol style="margin-left: 20px; line-height: 1.8;">
+          <li>أي وسم يستخدم لإنشاء قائمة نقطية؟
+            <br> a) &lt;ol&gt; &nbsp;&nbsp; b) &lt;ul&gt; &nbsp;&nbsp; c) &lt;li&gt;
+          </li>
+          <li>لإضافة صورة، نستخدم الخاصية:
+            <br> a) href &nbsp;&nbsp; b) class &nbsp;&nbsp; c) src
+          </li>
+          <li>لتغيير لون الخلفية لزر معين نستخدم:
+            <br> a) color &nbsp;&nbsp; b) background-color &nbsp;&nbsp; c) bgcolor
+          </li>
+          <li>ما هو الترتيب الصحيح لخصائص الـ border؟
+            <br> a) Color, Type, Thickness &nbsp;&nbsp; b) Thickness, Type, Color
+          </li>
+        </ol>
+      `},
+
+      { type: 'concept', title: '2. صح أم خطأ', titleAr: '', text: `
+        <ul style="margin-left: 20px; line-height: 1.8;">
+          <li>( ) وسم الصورة &lt;img&gt; يحتاج دائماً إلى وسم إغلاق &lt;/img&gt;.</li>
+          <li>( ) الخاصية transition تستخدم لتغيير حالة العنصر فوراً دون تدرج.</li>
+          <li>( ) وسم &lt;span&gt; يستخدم لتمييز وتنسيق جزء صغير من النص داخل السطر.</li>
+          <li>( ) لكتابة class في الـ CSS يجب أن نبدأ باسم الـ class مباشرة دون علامات.</li>
+        </ul>
+      `},
+
+      { type: 'concept', title: '3. اكتشف الخطأ', titleAr: '', text: `
+        <p>يوجد خطأ في الكود التالي، اكتشفه وصححه:</p>
+        <pre style="background: rgba(0,0,0,0.2); color: #fff; padding: 10px; border-radius: 5px; font-family: 'Fira Code', monospace; font-size: 13px;">
+&lt;h1&gt;Welcome&lt;h1&gt;
+&lt;input type="button" text="Click Me"&gt;
+
+btn {
+  color: red;
+}
+        </pre>
+      `},
+
+      { type: 'concept', title: '4. التمرين النهائي (مشروع صغير)', titleAr: '', text: `
+        <p>باستخدام المحرر (Coding Lab)، صمم صفحة تحتوي على:</p>
+        <ul style="margin-left: 20px; line-height: 1.8;">
+          <li>عنوان رئيسي أزرق اللون.</li>
+          <li>صورة من اختيارك.</li>
+          <li>قائمة نقطية تحتوي على 3 مهام.</li>
+          <li>زر مكتوب عليه "إرسال"، له إطار 2px solid black، ويتغير لون خلفيته تدريجياً خلال 1s عند مرور الماوس عليه.</li>
+        </ul>
+      `},
+
+      { type: 'concept', title: '💡 نموذج الإجابة السريع', titleAr: '', text: `
+        <div style="background: rgba(16, 185, 129, 0.1); padding: 15px; border-radius: 8px; border-left: 4px solid var(--accent-emerald);">
+          <strong>1. MCQ:</strong> 1(b), 2(c), 3(b), 4(b)<br>
+          <strong>2. صح وخطأ:</strong> (خطأ) - (خطأ) - (صح) - (خطأ)<br>
+          <strong>3. تصحيح الخطأ:</strong> <br>
+          - وسم الإغلاق يكون &lt;/h1&gt;<br>
+          - النص داخل الزر يُكتب بالخاصية value="Click Me"<br>
+          - يجب وضع نقطة قبل الـ class في الـ CSS هكذا .btn 
+        </div>
+      `}
+    ]
   }
 ];

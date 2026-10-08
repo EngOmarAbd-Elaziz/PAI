@@ -18,25 +18,8 @@ for (let i = 1; i <= 3; i++) {
 }
 `;
 
-const DEFAULT_CODE_HTML = `<!-- Write your HTML here -->
-
-<div id="app">
-  <h1>Hello Webpage</h1>
-  <button id="btn">Click Me</button>
-</div>
-`;
-
-const DEFAULT_CODE_CSS = `/* Write your CSS here */
-
-#app {
-  text-align: center;
-  padding: 20px;
-}
-
-h1 {
-  color: #06b6d4;
-}
-`;
+const DEFAULT_CODE_HTML = ``;
+const DEFAULT_CODE_CSS = ``;
 
 /* ─── State ──────────────────────────────────────────────────────────────── */
 let editorViews = { html: null, css: null, js: null };
@@ -45,13 +28,30 @@ let currentLang = 'js';
 let currentDiagnostics = [];
 let executionState = 'IDLE'; // IDLE, RUNNING, WAITING, STOPPED
 
+/* ─── Helper: check if code is truly empty (ignoring whitespace & comments) ─── */
+function isCodeEmpty(code, lang) {
+  if (!code) return true;
+  const trimmed = code.trim();
+  if (trimmed === '') return true;
+  if (lang === 'html') {
+    return trimmed.replace(/<!--[\s\S]*?-->/g, '').trim() === '';
+  }
+  if (lang === 'css') {
+    return trimmed.replace(/\/\*[\s\S]*?\*\//g, '').trim() === '';
+  }
+  if (lang === 'js') {
+    return trimmed.replace(/\/\*[\s\S]*?\*\/|\/\/.*/g, '').trim() === '';
+  }
+  return false;
+}
+
 /* ─── Initialise ─────────────────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
   const btnRun   = document.getElementById('btn-run');
   const btnClear = document.getElementById('btn-clear');
   const btnReset = document.getElementById('btn-reset');
   const output   = document.getElementById('console-output');
-  const sandbox  = document.getElementById('sandbox');
+  let sandbox    = document.getElementById('sandbox');
 
   /* ── Tab setup ────────────────────────────────────────────────────────── */
   const tabs = document.querySelectorAll('.editor-tab');
@@ -71,6 +71,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     if (editorViews[lang]) {
+      if (typeof editorViews[lang].requestMeasure === 'function') {
+        editorViews[lang].requestMeasure();
+      }
       editorViews[lang].focus();
     }
   }
@@ -88,13 +91,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnViewConsole   = document.getElementById('btn-view-console');
 
   function setOutputView(view) {
+    const currentSandbox = document.getElementById('sandbox');
     if (view === 'preview') {
-      sandbox.style.display = 'block';
+      if (currentSandbox) currentSandbox.style.display = 'block';
       output.style.display = 'none';
       btnViewPreview?.classList.add('active');
       btnViewConsole?.classList.remove('active');
     } else {
-      sandbox.style.display = 'none';
+      if (currentSandbox) currentSandbox.style.display = 'none';
       output.style.display = 'block';
       btnViewConsole?.classList.add('active');
       btnViewPreview?.classList.remove('active');
@@ -150,6 +154,13 @@ document.addEventListener('DOMContentLoaded', () => {
       case 'sandbox-error':
         appendError(event.data.message, event.data.line, event.data.source || 'JavaScript');
         break;
+      case 'sandbox-alert':
+        try {
+          alert(event.data.message);
+        } catch (e) {
+          appendOutput([event.data.message], 'info');
+        }
+        break;
       case 'sandbox-clear':
         output.innerHTML = '';
         break;
@@ -190,7 +201,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function stopExecution() {
     setExecutionState('STOPPED');
-    sandbox.srcdoc = ''; // Kill the iframe
+    const s = document.getElementById('sandbox');
+    if (s) s.srcdoc = ''; // Kill the iframe
     removePromptUI();
     appendSystemMessage('Execution stopped.', 'system');
   }
@@ -306,7 +318,10 @@ document.addEventListener('DOMContentLoaded', () => {
     currentPromptId = null;
     setExecutionState('RUNNING');
     
-    sandbox.contentWindow.postMessage({ type: 'prompt-reply', id: id, value: value }, '*');
+    const currentSandbox = document.getElementById('sandbox');
+    if (currentSandbox && currentSandbox.contentWindow) {
+      currentSandbox.contentWindow.postMessage({ type: 'prompt-reply', id: id, value: value }, '*');
+    }
   }
 
   function removePromptUI() {
@@ -336,32 +351,33 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function runCode() {
-    const codeJs = getCode('js');
+    const codeJs   = getCode('js');
     const codeHtml = getCode('html');
-    const codeCss = getCode('css');
+    const codeCss  = getCode('css');
 
     output.innerHTML = '';
     removePromptUI();
     setExecutionState('RUNNING');
 
     const outputTitle = document.getElementById('output-title');
-    const hasHtml = codeHtml.trim() !== '';
-    const hasCss  = codeCss.trim() !== '';
-    const hasJs   = codeJs.trim() !== '';
+    const hasHtml = !isCodeEmpty(codeHtml, 'html');
+    const hasCss  = !isCodeEmpty(codeCss, 'css');
 
     if (!hasHtml && !hasCss) {
       // Case A: Pure JavaScript
       if (outputModeToggle) outputModeToggle.style.display = 'none';
       if (outputTitle) outputTitle.textContent = '⬛ Output';
       output.style.display = 'block';
-      sandbox.style.display = 'none';
+      const curSandbox = document.getElementById('sandbox');
+      if (curSandbox) curSandbox.style.display = 'none';
       runJSOnly(codeJs);
     } else if (!hasHtml && hasCss) {
       // CSS only without HTML
       if (outputModeToggle) outputModeToggle.style.display = 'none';
       if (outputTitle) outputTitle.textContent = '⬛ Output';
       output.style.display = 'block';
-      sandbox.style.display = 'none';
+      const curSandbox = document.getElementById('sandbox');
+      if (curSandbox) curSandbox.style.display = 'none';
       appendSystemMessage('CSS requires HTML content to be previewed.', 'system');
       setExecutionState('IDLE');
     } else {
@@ -419,7 +435,7 @@ document.addEventListener('DOMContentLoaded', () => {
           const m = e.reason.stack.match(/<anonymous>:(\\d+):/);
           if (m) line = Math.max(1, parseInt(m[1]) - ${wrapperOffset});
         }
-        _sendErr(msg, line);
+        _sendErr(msg, line, 'JavaScript');
       });
     <\/script></head><body><script>
       (async function() {
@@ -431,26 +447,63 @@ document.addEventListener('DOMContentLoaded', () => {
             const m = e.stack.match(/<anonymous>:(\\d+):/);
             if (m) line = Math.max(1, parseInt(m[1]) - ${wrapperOffset});
           }
-          _sendErr(e.name + ': ' + e.message, line);
+          _sendErr(e.name + ': ' + e.message, line, 'JavaScript');
         } finally {
           window.parent.postMessage({ type: 'sandbox-end' }, '*');
         }
       })();
     <\/script></body></html>`;
 
-    sandbox.srcdoc = html;
+    // Recreate/update sandbox for clean run
+    const container = document.querySelector('.output-panel');
+    let oldSandbox = document.getElementById('sandbox');
+    const newSandbox = document.createElement('iframe');
+    newSandbox.id = 'sandbox';
+    newSandbox.className = 'sandbox-output';
+    newSandbox.setAttribute('sandbox', 'allow-scripts allow-modals allow-same-origin');
+    newSandbox.setAttribute('title', 'Code execution sandbox');
+    newSandbox.style.display = 'none';
+
+    if (oldSandbox) {
+      oldSandbox.replaceWith(newSandbox);
+    } else {
+      container.appendChild(newSandbox);
+    }
+
+    newSandbox.srcdoc = html;
   }
 
   function runWebPage(codeHtml, codeCss, codeJs) {
+    // 1. Recreate iframe to guarantee a 100% fresh, isolated DOM & JS context without lingering timers/listeners
+    const container = document.querySelector('.output-panel');
+    let oldSandbox = document.getElementById('sandbox');
+    const newSandbox = document.createElement('iframe');
+    newSandbox.id = 'sandbox';
+    newSandbox.className = 'sandbox-output';
+    newSandbox.setAttribute('sandbox', 'allow-scripts allow-modals allow-same-origin');
+    newSandbox.setAttribute('title', 'Web Page Preview');
+    newSandbox.style.display = 'block';
+
+    if (oldSandbox) {
+      oldSandbox.replaceWith(newSandbox);
+    } else {
+      container.appendChild(newSandbox);
+    }
+
+    // 2. CSS Syntax validation
     const cssErr = checkCssSyntax(codeCss);
     if (cssErr) {
       appendError(cssErr.message, cssErr.line, 'CSS');
     }
 
+    // 3. Escape student JavaScript to prevent premature </script> closing
+    const safeJs = codeJs ? codeJs.replace(/<\/script>/gi, '<\\/script>') : '';
+
+    // 4. Bridge script injected into the preview for logging, error catching, and alert handling
     const bridgeScript = `
       <script>
         (function() {
-          let _errorSent = false;
+          var _errorSent = false;
           function _sendErr(msg, line, src) {
             window.parent.postMessage({ type: 'sandbox-error', message: msg, line: line, source: src || 'JavaScript' }, '*');
           }
@@ -463,19 +516,27 @@ document.addEventListener('DOMContentLoaded', () => {
           console.info  = function() { _send('info',  arguments); };
           console.clear = function() { window.parent.postMessage({ type: 'sandbox-clear' }, '*'); };
 
+          window.alert = function(msg) {
+            try {
+              window.parent.postMessage({ type: 'sandbox-alert', message: String(msg) }, '*');
+            } catch(e) {}
+          };
+
           window.addEventListener('error', function(e) {
-            _sendErr(e.message || 'Error in JavaScript', e.lineno || '?', 'JavaScript');
+            var line = e.lineno || '?';
+            _sendErr(e.message || 'Error in JavaScript', line, 'JavaScript');
           });
+
           window.addEventListener('unhandledrejection', function(e) {
-            let msg = e.reason ? (e.reason.message || String(e.reason)) : 'Unhandled Promise Rejection';
+            var msg = e.reason ? (e.reason.message || String(e.reason)) : 'Unhandled Promise Rejection';
             _sendErr(msg, '?', 'JavaScript');
           });
         })();
       <\\/script>
     `;
 
-    const styleTag = codeCss.trim() ? `<style>\n${codeCss}\n</style>` : '';
-    const scriptTag = codeJs.trim() ? `<script>\ntry {\n${codeJs}\n} catch(e) {\n  window.parent.postMessage({ type: 'sandbox-error', message: e.name + ': ' + e.message, line: '?', source: 'JavaScript' }, '*');\n}\n<\\/script>` : '';
+    const styleTag = codeCss.trim() ? `<style id="__codex_user_styles">\n${codeCss}\n</style>` : '';
+    const scriptTag = safeJs.trim() ? `<script id="__codex_user_script">\n${safeJs}\n<\\/script>` : '';
 
     const hasHtmlTag = /<html[\s>]/i.test(codeHtml);
     const hasHeadTag = /<head[\s>]/i.test(codeHtml);
@@ -510,7 +571,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </html>`;
     }
 
-    sandbox.srcdoc = fullDoc;
+    newSandbox.srcdoc = fullDoc;
     setExecutionState('IDLE');
   }
 
@@ -581,7 +642,8 @@ function initCodeMirror() {
     doc: savedHtml,
     extensions: [
       ...commonExtensions,
-      html ? html() : [],
+      html ? html({ autoCloseTags: true }) : [],
+      autocompletion({ override: [htmlCompletions] }),
       EditorView.updateListener.of((update) => {
         if (update.docChanged) localStorage.setItem(STORAGE_KEY_HTML, update.state.doc.toString());
       }),
@@ -599,6 +661,7 @@ function initCodeMirror() {
     extensions: [
       ...commonExtensions,
       css ? css() : [],
+      autocompletion({ override: [cssCompletions] }),
       EditorView.updateListener.of((update) => {
         if (update.docChanged) localStorage.setItem(STORAGE_KEY_CSS, update.state.doc.toString());
       }),
@@ -697,6 +760,254 @@ function updateProblemsPanel(view, diagnostics) {
     el.addEventListener('click', go);
     el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') go(); });
   });
+}
+
+/* ─── Custom HTML completions ────────────────────────────────────────────── */
+function htmlCompletions(context) {
+  const textBefore = context.state.doc.sliceString(0, context.pos);
+  
+  // 1. Tag name completion: when typing '<' or '</'
+  const tagOpenMatch = context.matchBefore(/<\/?[\w-]*/);
+  if (tagOpenMatch) {
+    const isClosing = tagOpenMatch.text.startsWith('</');
+    const prefixLen = isClosing ? 2 : 1;
+    const from = tagOpenMatch.from + prefixLen;
+
+    const htmlTags = [
+      'html', 'head', 'body', 'title', 'meta', 'link', 'style', 'script',
+      'div', 'span', 'p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+      'button', 'input', 'form', 'label', 'textarea', 'select', 'option',
+      'img', 'a', 'ul', 'ol', 'li', 'table', 'thead', 'tbody', 'tr', 'td', 'th',
+      'header', 'footer', 'nav', 'main', 'section', 'article', 'aside',
+      'iframe', 'canvas', 'video', 'audio', 'svg', 'hr', 'br', 'strong', 'em', 'code', 'pre'
+    ];
+
+    return {
+      from,
+      options: htmlTags.map(tag => ({
+        label: tag,
+        type: 'type',
+        info: `HTML <${tag}> element`,
+        apply: (view, completion, from, to) => {
+          if (isClosing) {
+            view.dispatch({ changes: { from, to, insert: `${tag}>` } });
+          } else {
+            const voidTags = ['img', 'input', 'br', 'hr', 'meta', 'link'];
+            if (voidTags.includes(tag)) {
+              const insertText = `${tag}>`;
+              view.dispatch({ changes: { from, to, insert: insertText } });
+            } else {
+              const insertText = `${tag}></${tag}>`;
+              view.dispatch({
+                changes: { from, to, insert: insertText },
+                selection: { anchor: from + tag.length + 1 } // place cursor inside <tag>|</tag>
+              });
+            }
+          }
+        }
+      }))
+    };
+  }
+
+  // 2. Inside an open tag: Attribute or Attribute Value completion
+  const lastOpen = textBefore.lastIndexOf('<');
+  const lastClose = textBefore.lastIndexOf('>');
+  if (lastOpen > lastClose) {
+    const tagContent = textBefore.slice(lastOpen + 1);
+    const tagNameMatch = tagContent.match(/^([a-zA-Z0-9-]+)/);
+    const tagName = tagNameMatch ? tagNameMatch[1].toLowerCase() : '';
+
+    // Check if typing attribute value e.g. type="
+    const attrValMatch = tagContent.match(/([a-zA-Z-]+)\s*=\s*["']([^"']*)$/);
+    if (attrValMatch) {
+      const attrName = attrValMatch[1].toLowerCase();
+      const valWord = context.matchBefore(/[^"']*/);
+      let values = [];
+      if (attrName === 'type') {
+        values = ['text', 'password', 'email', 'number', 'checkbox', 'radio', 'button', 'submit', 'reset', 'date', 'file', 'color', 'range', 'hidden'];
+      } else if (attrName === 'target') {
+        values = ['_blank', '_self', '_parent', '_top'];
+      } else if (attrName === 'method') {
+        values = ['GET', 'POST'];
+      } else if (attrName === 'rel') {
+        values = ['stylesheet', 'icon', 'noopener', 'noreferrer'];
+      }
+
+      if (values.length > 0) {
+        return {
+          from: valWord ? valWord.from : context.pos,
+          options: values.map(v => ({ label: v, type: 'constant' }))
+        };
+      }
+    }
+
+    // Attribute Name
+    const attrWord = context.matchBefore(/[\w-]*/);
+    let tagAttrs = [];
+    if (tagName === 'button') {
+      tagAttrs = ['id', 'class', 'type', 'disabled', 'name', 'value', 'title', 'aria-label', 'style', 'onclick', 'autofocus'];
+    } else if (tagName === 'img') {
+      tagAttrs = ['src', 'alt', 'width', 'height', 'loading', 'id', 'class', 'style', 'title'];
+    } else if (tagName === 'input') {
+      tagAttrs = ['type', 'name', 'id', 'placeholder', 'value', 'required', 'disabled', 'checked', 'class', 'style', 'min', 'max', 'step', 'maxlength', 'autocomplete'];
+    } else if (tagName === 'a') {
+      tagAttrs = ['href', 'target', 'rel', 'id', 'class', 'title', 'download'];
+    } else if (tagName === 'form') {
+      tagAttrs = ['action', 'method', 'id', 'class', 'enctype', 'target'];
+    } else {
+      tagAttrs = ['id', 'class', 'style', 'title', 'hidden', 'tabindex', 'role', 'aria-label', 'aria-hidden', 'dir', 'lang', 'data-id'];
+    }
+
+    const universal = ['id', 'class', 'style', 'title'];
+    universal.forEach(u => {
+      if (!tagAttrs.includes(u)) tagAttrs.push(u);
+    });
+
+    return {
+      from: attrWord ? attrWord.from : context.pos,
+      options: tagAttrs.map(attr => ({
+        label: attr,
+        type: 'property',
+        info: `Attribute for <${tagName}>`,
+        apply: (view, completion, from, to) => {
+          const insertText = `${attr}=""`;
+          view.dispatch({
+            changes: { from, to, insert: insertText },
+            selection: { anchor: from + attr.length + 2 } // put cursor inside quotes
+          });
+        }
+      }))
+    };
+  }
+
+  return null;
+}
+
+/* ─── Custom CSS completions ─────────────────────────────────────────────── */
+function cssCompletions(context) {
+  const textBefore = context.state.doc.sliceString(0, context.pos);
+  const lastOpenBrace = textBefore.lastIndexOf('{');
+  const lastCloseBrace = textBefore.lastIndexOf('}');
+
+  // 1. Inside a CSS rule block: { ... }
+  if (lastOpenBrace > lastCloseBrace) {
+    const blockContent = textBefore.slice(lastOpenBrace + 1);
+    const lastSemi = blockContent.lastIndexOf(';');
+    const currentDecl = lastSemi !== -1 ? blockContent.slice(lastSemi + 1) : blockContent;
+
+    // Check if after ':' -> Property Value
+    const colonIdx = currentDecl.lastIndexOf(':');
+    if (colonIdx !== -1) {
+      const propPart = currentDecl.slice(0, colonIdx).trim();
+      const propMatch = propPart.match(/([a-zA-Z-]+)$/);
+      const propName = propMatch ? propMatch[1].toLowerCase() : '';
+      const valWord = context.matchBefore(/[\w-]*/);
+
+      let valOptions = [];
+      if (propName === 'display') {
+        valOptions = ['block', 'inline', 'inline-block', 'flex', 'inline-flex', 'grid', 'inline-grid', 'none'];
+      } else if (propName === 'position') {
+        valOptions = ['static', 'relative', 'absolute', 'fixed', 'sticky'];
+      } else if (propName === 'font-weight') {
+        valOptions = ['normal', 'bold', 'bolder', 'lighter', '100', '200', '300', '400', '500', '600', '700', '800', '900'];
+      } else if (propName === 'text-align') {
+        valOptions = ['left', 'right', 'center', 'justify'];
+      } else if (propName === 'flex-direction') {
+        valOptions = ['row', 'row-reverse', 'column', 'column-reverse'];
+      } else if (propName === 'justify-content') {
+        valOptions = ['flex-start', 'flex-end', 'center', 'space-between', 'space-around', 'space-evenly'];
+      } else if (propName === 'align-items') {
+        valOptions = ['flex-start', 'flex-end', 'center', 'baseline', 'stretch'];
+      } else if (propName === 'overflow' || propName === 'overflow-x' || propName === 'overflow-y') {
+        valOptions = ['visible', 'hidden', 'scroll', 'auto'];
+      } else if (propName === 'cursor') {
+        valOptions = ['pointer', 'default', 'not-allowed', 'grab', 'grabbing', 'move', 'text'];
+      } else if (propName === 'box-sizing') {
+        valOptions = ['border-box', 'content-box'];
+      } else if (propName === 'border-style') {
+        valOptions = ['solid', 'dashed', 'dotted', 'double', 'none'];
+      } else if (propName.includes('color') || propName === 'background') {
+        valOptions = ['transparent', 'currentColor', 'inherit', 'red', 'blue', 'green', 'yellow', 'cyan', 'white', 'black', 'gray', 'orange', 'purple', '#06b6d4', '#10b981', '#f59e0b', '#ef4444', '#3b82f6'];
+      } else {
+        valOptions = ['0', 'auto', 'inherit', '100%', '50%', '10px', '20px', '1rem', '2rem'];
+      }
+
+      return {
+        from: valWord ? valWord.from : context.pos,
+        options: valOptions.map(v => ({
+          label: v,
+          type: 'constant',
+          apply: (view, completion, from, to) => {
+            const insertText = completion.label.endsWith(';') ? completion.label : `${completion.label};`;
+            view.dispatch({ changes: { from, to, insert: insertText } });
+          }
+        }))
+      };
+    }
+
+    // Before ':' -> Property Name
+    const propWord = context.matchBefore(/[\w-]*/);
+    const cssProps = [
+      'color', 'background', 'background-color', 'background-image', 'background-size', 'background-position',
+      'display', 'position', 'top', 'right', 'bottom', 'left', 'z-index',
+      'margin', 'margin-top', 'margin-right', 'margin-bottom', 'margin-left',
+      'padding', 'padding-top', 'padding-right', 'padding-bottom', 'padding-left',
+      'width', 'max-width', 'min-width', 'height', 'max-height', 'min-height',
+      'font-size', 'font-family', 'font-weight', 'font-style', 'line-height',
+      'text-align', 'text-decoration', 'text-transform', 'letter-spacing',
+      'border', 'border-radius', 'border-width', 'border-color', 'border-style',
+      'box-shadow', 'box-sizing', 'opacity', 'overflow', 'cursor', 'visibility',
+      'transform', 'transition', 'animation',
+      'flex', 'flex-direction', 'flex-wrap', 'justify-content', 'align-items', 'align-content', 'gap',
+      'grid', 'grid-template-columns', 'grid-template-rows', 'grid-gap'
+    ];
+
+    return {
+      from: propWord ? propWord.from : context.pos,
+      options: cssProps.map(p => ({
+        label: p,
+        type: 'property',
+        info: `CSS property: ${p}`,
+        apply: (view, completion, from, to) => {
+          const insertText = `${p}: `;
+          view.dispatch({
+            changes: { from, to, insert: insertText },
+            selection: { anchor: from + insertText.length }
+          });
+        }
+      }))
+    };
+  }
+
+  // 2. Outside a block -> Selectors
+  const selWord = context.matchBefore(/[\w-:#.]*/);
+  if (selWord && (selWord.text.length >= 1 || context.explicit)) {
+    const selectors = [
+      'div', 'span', 'p', 'h1', 'h2', 'h3', 'button', 'input', 'form', 'label', 'img', 'a', 'ul', 'ol', 'li', 'table',
+      'body', 'html', 'header', 'footer', 'nav', 'main', 'section',
+      ':hover', ':active', ':focus', ':first-child', ':last-child', '::before', '::after'
+    ];
+    return {
+      from: selWord.from,
+      options: selectors.map(s => ({
+        label: s,
+        type: 'class',
+        apply: (view, completion, from, to) => {
+          if (s.startsWith(':')) {
+            view.dispatch({ changes: { from, to, insert: s } });
+          } else {
+            const insertText = `${s} {\n  \n}`;
+            view.dispatch({
+              changes: { from, to, insert: insertText },
+              selection: { anchor: from + s.length + 5 } // place cursor inside braces
+            });
+          }
+        }
+      }))
+    };
+  }
+
+  return null;
 }
 
 /* ─── Custom JS completions ──────────────────────────────────────────────── */

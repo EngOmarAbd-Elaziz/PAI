@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JavaScript Lab | CODEX Library</title>
+  <title>Coding Lab | CODEX Library</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Fira+Code:wght@400;600;700&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Fira+Code:wght@400;600;700&family=Outfit:wght@400;600;700;800;900&display=swap"
+    rel="stylesheet">
 
   <link rel="icon" type="image/png" href="CODEX_LOGO-preview.png" sizes="any">
   <link rel="apple-touch-icon" href="CODEX_LOGO-preview.png">
@@ -17,6 +20,7 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="css/lab.css">
 </head>
+
 <body>
   <!-- Background Ambient Glows -->
   <div class="ambient-glow ambient-glow-1"></div>
@@ -47,9 +51,9 @@
         <div class="lab-subtitle-ar">بيئة تفاعلية لتجربة الأكواد</div>
       </div>
       <div class="lab-actions">
-        <button id="btn-run"   class="btn-primary"   aria-label="Run code">▶ Run</button>
+        <button id="btn-run" class="btn-primary" aria-label="Run code">▶ Run</button>
         <button id="btn-clear" class="btn-secondary" aria-label="Clear output">Clear</button>
-        <button id="btn-reset" class="btn-danger"    aria-label="Reset to default code">Reset</button>
+        <button id="btn-reset" class="btn-danger" aria-label="Reset to default code">Reset</button>
       </div>
     </header>
 
@@ -69,14 +73,18 @@
             <span class="panel-header-hint">Tab = indent · Ctrl+Z = undo · Ctrl+F = find</span>
           </div>
           <!-- CodeMirror mounts here. Falls back to <textarea> if bundle fails. -->
-          <div id="editor-container-html" class="editor-container" style="display: none;" role="textbox" aria-label="HTML code editor" aria-multiline="true"></div>
-          <div id="editor-container-css" class="editor-container" style="display: none;" role="textbox" aria-label="CSS code editor" aria-multiline="true"></div>
-          <div id="editor-container-js" class="editor-container" role="textbox" aria-label="JavaScript code editor" aria-multiline="true"></div>
+          <div id="editor-container-html" class="editor-container" style="display: none;" role="textbox"
+            aria-label="HTML code editor" aria-multiline="true"></div>
+          <div id="editor-container-css" class="editor-container" style="display: none;" role="textbox"
+            aria-label="CSS code editor" aria-multiline="true"></div>
+          <div id="editor-container-js" class="editor-container" role="textbox" aria-label="JavaScript code editor"
+            aria-multiline="true"></div>
         </section>
 
         <!-- Problems Panel -->
         <section class="lab-panel problems-panel" id="problems-panel">
-          <div class="panel-header problems-panel-header" id="problems-toggle" role="button" tabindex="0" aria-expanded="true" aria-controls="problems-list">
+          <div class="panel-header problems-panel-header" id="problems-toggle" role="button" tabindex="0"
+            aria-expanded="true" aria-controls="problems-list">
             <span>⚡ Problems</span>
             <span class="problem-count-badge" id="problem-count">0</span>
             <span class="problems-collapse-icon" aria-hidden="true">▾</span>
@@ -98,7 +106,8 @@
           </div>
         </div>
         <div id="console-output" class="console-output" role="log" aria-live="polite" aria-label="Console output"></div>
-        <iframe id="sandbox" class="sandbox-output" sandbox="allow-scripts allow-modals" style="display:none;" title="Code execution sandbox"></iframe>
+        <iframe id="sandbox" class="sandbox-output" sandbox="allow-scripts allow-modals" style="display:none;"
+          title="Code execution sandbox"></iframe>
       </section>
 
     </div>
@@ -133,4 +142,5 @@
     });
   </script>
 </body>
+
 </html>

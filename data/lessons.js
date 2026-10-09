@@ -295,7 +295,7 @@ console.log(count);` },
     icon: '🎨',
     description: 'Master web structure with HTML and professional styling with CSS. Create interactive inputs and dynamic hover effects.',
     descriptionAr: 'اتعلم إزاي تبني هيكل الصفحة بـ HTML وتنسقها بـ CSS. هنضيف أزرار وحقول إدخال ونتعلم تأثيرات الـ Hover الاحترافية.',
-    slideCount: 6,
+    slideCount: 12,
     slidesFile: 'slides/lesson-03.html',
     handout: [
       // ── INTRODUCTION ──────────────────────────────────────────────

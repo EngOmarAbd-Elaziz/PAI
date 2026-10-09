@@ -2,7 +2,7 @@
 <article id="slide-1" class="slide active">
   <div class="slide-header">
     <div class="slide-title-wrap">
-      <span class="slide-tag tag-review">Web Design</span>
+      <span class="slide-tag tag-review">Web Design • Lecture 03</span>
       <h1 class="slide-title">HTML & CSS</h1>
       <div class="slide-title-arabic ar">لغة الـ HTML والـ CSS</div>
     </div>
@@ -12,12 +12,10 @@
   <div class="slide-body">
     <div class="content-text-side">
       <p class="concept-lead">
-        Welcome back to Web Design! Today we integrate <span class="highlight">HTML</span> structure with <span
-          class="highlight">CSS</span> styling to create interactive, beautiful web pages.
+        Welcome back! Today we build the <span class="highlight">Skeleton</span> (HTML) and paint the <span class="highlight">Decor</span> (CSS) to create interactive, beautiful web pages.
       </p>
       <div class="arabic-clarification">
-        أهلاً بكم في الحصة الثالثة. اليوم هنتعلم إزاي نبني صفحة ويب متكاملة باستخدام HTML عشان نحط المحتوى، وCSS عشان
-        ننسق المحتوى ده ونخليه شكله احترافي، وهنتعلم نضيف حركات ناعمة وتأثيرات للأزرار.
+        أهلاً بكم في الحصة الثالثة. اليوم هنتعلم إزاي نبني صفحة ويب متكاملة. الـ HTML هو الهيكل والطوب، والـ CSS هو الألوان والديكور. وهنتعلم كمان إزاي نضيف حركات ناعمة وتأثيرات احترافية.
       </div>
       <ul class="feature-list">
         <li class="feature-item">
@@ -59,13 +57,46 @@
   </div>
 </article>
 
-<!-- Slide 2: Review HTML -->
+<!-- Slide 2: Why Are We Here? -->
 <article id="slide-2" class="slide">
   <div class="slide-header">
     <div class="slide-title-wrap">
-      <span class="slide-tag tag-variables">Topic 1 • HTML Review</span>
-      <h2 class="slide-title">Headings, Paragraphs & Lists</h2>
-      <div class="slide-title-arabic ar">العناوين، الفقرات، والقوائم</div>
+      <span class="slide-tag tag-review">Orientation</span>
+      <h2 class="slide-title">The Digital House</h2>
+      <div class="slide-title-arabic ar">بناء المنزل الرقمي</div>
+    </div>
+    <div class="slide-category-pill">Orientation</div>
+  </div>
+
+  <div class="slide-body">
+    <div class="content-text-side">
+      <p class="concept-lead">
+        Building a website is exactly like building a house. You cannot paint the walls before building them!
+      </p>
+      <div class="arabic-clarification">
+        تخيل إنك بتبني عمارة. مستحيل تبدأ تدهن الحيطان وتفرش السجاد قبل ما تبني الطوب والأساسات! الـ HTML هو الطوب، والـ CSS هو الديكور والألوان.
+      </div>
+      <ul class="feature-list">
+        <li class="feature-item">
+          <div class="feature-icon icon-cyan">🧱</div>
+          <div><strong>HTML:</strong> Text, Images, Lists, Links.</div>
+        </li>
+        <li class="feature-item">
+          <div class="feature-icon icon-pink">🖌️</div>
+          <div><strong>CSS:</strong> Colors, Spacing, Animations, Layout.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</article>
+
+<!-- Slide 3: Review HTML - Text -->
+<article id="slide-3" class="slide">
+  <div class="slide-header">
+    <div class="slide-title-wrap">
+      <span class="slide-tag tag-variables">Unit 1 • HTML Review</span>
+      <h2 class="slide-title">Headings & Paragraphs</h2>
+      <div class="slide-title-arabic ar">العناوين والفقرات</div>
     </div>
     <div class="slide-category-pill">Concept</div>
   </div>
@@ -73,24 +104,19 @@
   <div class="slide-body">
     <div class="content-text-side">
       <p class="concept-lead">
-        We use specific <span class="highlight">Tags</span> in HTML to define different parts of the document.
+        We use specific <span class="highlight">Tags</span> in HTML to define the meaning of our text.
       </p>
       <div class="arabic-clarification">
-        الـ HTML بيوفرلنا وسوم (Tags) لترتيب الكلام. بنستخدم &lt;h1&gt; للعنوان، و &lt;p&gt; للفقرة، و &lt;ul&gt; مع
-        &lt;li&gt; لإنشاء قوائم نقطية.
+        الـ HTML بيوفرلنا وسوم (Tags) لترتيب الكلام. بنستخدم &lt;h1&gt; للعنوان الرئيسي الضخم، و &lt;p&gt; للفقرة العادية. ولازم نقفل الوسم عشان المتصفح يفهم إننا خلصنا.
       </div>
       <ul class="feature-list">
         <li class="feature-item">
           <div class="feature-icon icon-cyan">H</div>
-          <div><strong>&lt;h1&gt; to &lt;h6&gt;:</strong> Headings from largest to smallest.</div>
+          <div><strong>&lt;h1&gt; to &lt;h6&gt;:</strong> Headings.</div>
         </li>
         <li class="feature-item">
           <div class="feature-icon icon-emerald">P</div>
           <div><strong>&lt;p&gt;:</strong> Paragraphs for regular text.</div>
-        </li>
-        <li class="feature-item">
-          <div class="feature-icon icon-purple">L</div>
-          <div><strong>&lt;ul&gt; &amp; &lt;li&gt;:</strong> Unordered lists and list items.</div>
         </li>
       </ul>
     </div>
@@ -100,24 +126,21 @@
           <div class="mac-dots"><span></span><span></span><span></span></div>
           <div class="code-lang-label">HTML</div>
         </div>
-        <pre><code class="language-html">&lt;h1&gt;My Goals&lt;/h1&gt;
-&lt;p&gt;I want to learn coding.&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Learn HTML&lt;/li&gt;
-  &lt;li&gt;Learn CSS&lt;/li&gt;
-&lt;/ul&gt;</code></pre>
+        <pre><code class="language-html">&lt;h1&gt;My Engineering Goals&lt;/h1&gt;
+
+&lt;p&gt;I want to learn coding because it is the language of the future.&lt;/p&gt;</code></pre>
       </div>
     </div>
   </div>
 </article>
 
-<!-- Slide 3: Intro to CSS -->
-<article id="slide-3" class="slide">
+<!-- Slide 4: Review HTML - Lists & Images -->
+<article id="slide-4" class="slide">
   <div class="slide-header">
     <div class="slide-title-wrap">
-      <span class="slide-tag tag-variables">Topic 2 • Styling</span>
-      <h2 class="slide-title">CSS Anatomy & Classes</h2>
-      <div class="slide-title-arabic ar">أجزاء الـ CSS والفئات</div>
+      <span class="slide-tag tag-variables">Unit 1 • HTML Review</span>
+      <h2 class="slide-title">Lists & Images</h2>
+      <div class="slide-title-arabic ar">القوائم والصور</div>
     </div>
     <div class="slide-category-pill">Concept</div>
   </div>
@@ -125,25 +148,72 @@
   <div class="slide-body">
     <div class="content-text-side">
       <p class="concept-lead">
-        CSS consists of a <span class="highlight">Selector</span>, a <span class="highlight">Property</span>, and a
-        <span class="highlight">Value</span>. We use classes to target specific elements.
+        Lists organize items, while Images make the page visual. The <span class="highlight">&lt;img&gt;</span> tag is self-closing!
       </p>
       <div class="arabic-clarification">
-        أي كود CSS بيتكون من: المُحدد (Selector) عشان نختار العنصر، الخاصية (Property) زي اللون، والقيمة (Value).
-        وبنستخدم الـ Class (وبنكتب قبله نقطة) عشان نحدد عنصر معين بس.
+        القوائم بتحتاج وسم &lt;ul&gt; يضم جواه عناصر &lt;li&gt;. أما الصور فبنستخدم وسم &lt;img&gt; وهو مختلف لأنه مش محتاج وسم إغلاق، بس لازم نحدد مكان الصورة بخاصية src.
+      </div>
+      <ul class="feature-list">
+        <li class="feature-item">
+          <div class="feature-icon icon-purple">L</div>
+          <div><strong>&lt;ul&gt; &amp; &lt;li&gt;:</strong> Unordered lists and list items.</div>
+        </li>
+        <li class="feature-item">
+          <div class="feature-icon icon-amber">I</div>
+          <div><strong>&lt;img&gt;:</strong> Uses "src" attribute.</div>
+        </li>
+      </ul>
+    </div>
+    <div class="code-demo-side">
+      <div class="code-block-wrapper">
+        <div class="code-block-header">
+          <div class="mac-dots"><span></span><span></span><span></span></div>
+          <div class="code-lang-label">HTML</div>
+        </div>
+        <pre><code class="language-html">&lt;!-- Unordered List --&gt;
+&lt;ul&gt;
+  &lt;li&gt;Learn HTML&lt;/li&gt;
+  &lt;li&gt;Learn CSS&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;!-- Image Tag (No closing tag!) --&gt;
+&lt;img src="robot.png"&gt;</code></pre>
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- Slide 5: Intro to CSS -->
+<article id="slide-5" class="slide">
+  <div class="slide-header">
+    <div class="slide-title-wrap">
+      <span class="slide-tag tag-variables">Unit 2 • CSS Anatomy</span>
+      <h2 class="slide-title">Selector, Property, Value</h2>
+      <div class="slide-title-arabic ar">تشريح كود الـ CSS</div>
+    </div>
+    <div class="slide-category-pill">Concept</div>
+  </div>
+
+  <div class="slide-body">
+    <div class="content-text-side">
+      <p class="concept-lead">
+        Every CSS rule needs three things: <span class="highlight">Who</span> (Selector), <span class="highlight">What</span> (Property), and the <span class="highlight">Result</span> (Value).
+      </p>
+      <div class="arabic-clarification">
+        عشان تدي أمر للـ CSS، لازم تحدد 3 حاجات: المُحدد (أنا بكلم مين؟ مثلاً حرف p)، الخاصية (عايز أغير إيه؟ مثلاً color)، والقيمة (النتيجة إيه؟ مثلاً red).
       </div>
       <ul class="feature-list">
         <li class="feature-item">
           <div class="feature-icon icon-pink">S</div>
-          <div><strong>Selector:</strong> e.g., <code>p</code> or <code>.my-class</code></div>
+          <div><strong>Selector:</strong> e.g., <code>p</code> or <code>h1</code></div>
         </li>
         <li class="feature-item">
           <div class="feature-icon icon-amber">P</div>
-          <div><strong>Property:</strong> e.g., <code>color</code> or <code>background-color</code></div>
+          <div><strong>Property:</strong> e.g., <code>color</code></div>
         </li>
         <li class="feature-item">
           <div class="feature-icon icon-cyan">V</div>
-          <div><strong>Value:</strong> e.g., <code>red</code> or <code>20px</code></div>
+          <div><strong>Value:</strong> e.g., <code>red</code></div>
         </li>
       </ul>
     </div>
@@ -156,10 +226,10 @@
         <pre><code class="language-css">/* Selector { Property: Value; } */
 p {
   color: red;
+  background-color: yellow;
 }
 
-/* Class Selector */
-.blue-text {
+h1 {
   color: blue;
 }</code></pre>
       </div>
@@ -167,12 +237,51 @@ p {
   </div>
 </article>
 
-<!-- Slide 4: Inputs and Buttons -->
-<article id="slide-4" class="slide">
+<!-- Slide 6: Classes & Spans -->
+<article id="slide-6" class="slide">
   <div class="slide-header">
     <div class="slide-title-wrap">
-      <span class="slide-tag tag-variables">Topic 3 • Inputs</span>
-      <h2 class="slide-title">Inputs and Buttons</h2>
+      <span class="slide-tag tag-variables">Unit 2 • Advanced Selection</span>
+      <h2 class="slide-title">Classes & The Span Tag</h2>
+      <div class="slide-title-arabic ar">الفئات الدقيقة ووسم span</div>
+    </div>
+    <div class="slide-category-pill">Concept</div>
+  </div>
+
+  <div class="slide-body">
+    <div class="content-text-side">
+      <p class="concept-lead">
+        Use a <span class="highlight">Class</span> to style specific elements. Use <span class="highlight">&lt;span&gt;</span> to style a single word inside a line.
+      </p>
+      <div class="arabic-clarification">
+        تخيل عندك 100 كرسي وعايز تلون 5 منهم للـ VIP، الـ Class هو الاستيكر اللي هتحطه عليهم. ووسم span بنستخدمه لو عايزين نلون كلمة واحدة بس جوة سطر من غير ما السطر يتقطع.
+      </div>
+    </div>
+    <div class="code-demo-side">
+      <div class="code-block-wrapper">
+        <div class="code-block-header">
+          <div class="mac-dots"><span></span><span></span><span></span></div>
+          <div class="code-lang-label">HTML + CSS</div>
+        </div>
+        <pre><code class="language-html">&lt;p&gt;I love the &lt;span class="sea"&gt;sea&lt;/span&gt;.&lt;/p&gt;
+
+&lt;style&gt;
+  /* Notice the dot (.) before the class name! */
+  .sea {
+    color: blue;
+  }
+&lt;/style&gt;</code></pre>
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- Slide 7: Inputs and Buttons -->
+<article id="slide-7" class="slide">
+  <div class="slide-header">
+    <div class="slide-title-wrap">
+      <span class="slide-tag tag-variables">Unit 3 • Inputs</span>
+      <h2 class="slide-title">Forms: Inputs & Buttons</h2>
       <div class="slide-title-arabic ar">حقول الإدخال والأزرار</div>
     </div>
     <div class="slide-category-pill">Concept</div>
@@ -181,12 +290,21 @@ p {
   <div class="slide-body">
     <div class="content-text-side">
       <p class="concept-lead">
-        Use the <span class="highlight">&lt;input&gt;</span> tag to create interactive fields and buttons for user data.
+        A website without inputs is just a poster. Use the <span class="highlight">&lt;input&gt;</span> tag to let users interact!
       </p>
       <div class="arabic-clarification">
-        بنستخدم وسم &lt;input&gt; عشان نعمل أدوات الإدخال. لو كتبنا type="text" هيعمل مربع نص، ولو كتبنا type="button"
-        هيعمل زرار.
+        عشان نخلي المستخدم يتفاعل ويدخل بياناته، بنستخدم وسم &lt;input&gt;. الجميل إن الوسم ده بيتغير شكله حسب الـ type. لو text بيعمل مربع، ولو button بيعمل زرار.
       </div>
+      <ul class="feature-list">
+        <li class="feature-item">
+          <div class="feature-icon icon-cyan">⌨️</div>
+          <div><strong>Text Box:</strong> <code>type="text"</code></div>
+        </li>
+        <li class="feature-item">
+          <div class="feature-icon icon-emerald">🖱️</div>
+          <div><strong>Button:</strong> <code>type="button"</code></div>
+        </li>
+      </ul>
     </div>
     <div class="code-demo-side">
       <div class="code-block-wrapper">
@@ -194,22 +312,25 @@ p {
           <div class="mac-dots"><span></span><span></span><span></span></div>
           <div class="code-lang-label">HTML</div>
         </div>
-        <pre><code class="language-html">&lt;h1&gt;Survey&lt;/h1&gt;
-&lt;p&gt;What is your name?&lt;/p&gt;
+        <pre><code class="language-html">&lt;h1&gt;Login&lt;/h1&gt;
+
+&lt;p&gt;Username:&lt;/p&gt;
 &lt;input type="text"&gt;
+
+&lt;!-- value changes the button text --&gt;
 &lt;input type="button" value="Submit"&gt;</code></pre>
       </div>
     </div>
   </div>
 </article>
 
-<!-- Slide 5: CSS Hover & Transitions -->
-<article id="slide-5" class="slide">
+<!-- Slide 8: Essential Text Formatting -->
+<article id="slide-8" class="slide">
   <div class="slide-header">
     <div class="slide-title-wrap">
-      <span class="slide-tag tag-variables">Topic 4 • Interactivity</span>
-      <h2 class="slide-title">Hover & Transitions</h2>
-      <div class="slide-title-arabic ar">التفاعل والانتقالات الناعمة</div>
+      <span class="slide-tag tag-variables">Unit 4 • Text Formatting</span>
+      <h2 class="slide-title">Essential CSS Properties</h2>
+      <div class="slide-title-arabic ar">الخصائص الأساسية للتنسيق</div>
     </div>
     <div class="slide-category-pill">Concept</div>
   </div>
@@ -217,13 +338,29 @@ p {
   <div class="slide-body">
     <div class="content-text-side">
       <p class="concept-lead">
-        Use <span class="highlight">:hover</span> to change styles on mouse hover, and <span
-          class="highlight">transition</span> to make the change smooth.
+        Mastering these 4 properties gives you control over 80% of text styling in any web project.
       </p>
       <div class="arabic-clarification">
-        بنستخدم :hover عشان نغير شكل الزرار لما الماوس يعدي من عليه. وخاصية transition بتخلي التغيير ده يحصل بنعومة
-        بالتدريج.
+        إتقانك للخصائص الأربعة دي هيديك تحكم كامل في شكل أي نص في موقعك (اللون، الخلفية، الحجم، والسُمك).
       </div>
+      <ul class="feature-list">
+        <li class="feature-item">
+          <div class="feature-icon icon-cyan">A</div>
+          <div><strong>color:</strong> Changes text color.</div>
+        </li>
+        <li class="feature-item">
+          <div class="feature-icon icon-emerald">🎨</div>
+          <div><strong>background-color:</strong> Changes background box.</div>
+        </li>
+        <li class="feature-item">
+          <div class="feature-icon icon-pink">📏</div>
+          <div><strong>font-size:</strong> Measured in pixels (px).</div>
+        </li>
+        <li class="feature-item">
+          <div class="feature-icon icon-amber">B</div>
+          <div><strong>font-weight:</strong> Make it bold.</div>
+        </li>
+      </ul>
     </div>
     <div class="code-demo-side">
       <div class="code-block-wrapper">
@@ -231,28 +368,24 @@ p {
           <div class="mac-dots"><span></span><span></span><span></span></div>
           <div class="code-lang-label">CSS</div>
         </div>
-        <pre><code class="language-css">.btn {
-  background-color: gray;
-  /* 1 second transition */
-  transition: 1s; 
-}
-
-/* When mouse hovers */
-.btn:hover {
-  background-color: lime;
+        <pre><code class="language-css">.submit-btn {
+  color: white;
+  background-color: black;
+  font-size: 18px;
+  font-weight: bold;
 }</code></pre>
       </div>
     </div>
   </div>
 </article>
 
-<!-- Slide 6: Borders -->
-<article id="slide-6" class="slide">
+<!-- Slide 9: CSS Hover -->
+<article id="slide-9" class="slide">
   <div class="slide-header">
     <div class="slide-title-wrap">
-      <span class="slide-tag tag-variables">Topic 5 • Box Model</span>
-      <h2 class="slide-title">CSS Borders</h2>
-      <div class="slide-title-arabic ar">إضافة الحدود للعناصر</div>
+      <span class="slide-tag tag-variables">Unit 5 • Interactivity</span>
+      <h2 class="slide-title">The :hover Pseudo-class</h2>
+      <div class="slide-title-arabic ar">سحر الـ Hover</div>
     </div>
     <div class="slide-category-pill">Concept</div>
   </div>
@@ -260,12 +393,10 @@ p {
   <div class="slide-body">
     <div class="content-text-side">
       <p class="concept-lead">
-        The <span class="highlight">border</span> property adds a frame around elements with thickness, style, and
-        color.
+        Use <span class="highlight">:hover</span> to change styles ONLY when the mouse pointer is resting on the element.
       </p>
       <div class="arabic-clarification">
-        خاصية border بتعمل إطار حوالين العنصر. بنحدد فيه 3 حاجات بالترتيب: السُمك (بالبيكسل px)، والنوع (زي solid أو
-        double)، واللون.
+        عشان نحسس المستخدم إن الزرار شغال وتفاعلي، بنستخدم :hover. دي بتخلي الكود يتنفذ (مثلاً يتغير لونه) فقط طول ما الماوس فوق العنصر.
       </div>
     </div>
     <div class="code-demo-side">
@@ -274,15 +405,139 @@ p {
           <div class="mac-dots"><span></span><span></span><span></span></div>
           <div class="code-lang-label">CSS</div>
         </div>
-        <pre><code class="language-css">.my-box {
+        <pre><code class="language-css">/* 1. Normal State */
+.btn-magic {
+  background-color: gray;
+  color: white;
+}
+
+/* 2. Hover State */
+.btn-magic:hover {
+  background-color: lime;
+  color: black;
+}</code></pre>
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- Slide 10: CSS Transitions -->
+<article id="slide-10" class="slide">
+  <div class="slide-header">
+    <div class="slide-title-wrap">
+      <span class="slide-tag tag-variables">Unit 6 • Smoothness</span>
+      <h2 class="slide-title">Smooth Transitions</h2>
+      <div class="slide-title-arabic ar">نعومة الانتقالات التدريجية</div>
+    </div>
+    <div class="slide-category-pill">Concept</div>
+  </div>
+
+  <div class="slide-body">
+    <div class="content-text-side">
+      <p class="concept-lead">
+        The <span class="highlight">transition</span> property slows down CSS changes over a specified time in seconds (s).
+      </p>
+      <div class="arabic-clarification">
+        تغيير اللون في الـ hover بيحصل فجأة زي الخبطة! عشان نخليه يتغير بنعومة واحترافية، بنستخدم transition وبنحدد الوقت بالثواني (s).
+      </div>
+    </div>
+    <div class="code-demo-side">
+      <div class="code-block-wrapper">
+        <div class="code-block-header">
+          <div class="mac-dots"><span></span><span></span><span></span></div>
+          <div class="code-lang-label">CSS</div>
+        </div>
+        <pre><code class="language-css">.btn-smooth {
+  background-color: blue;
+  
+  /* Takes 1 second to change */
+  transition: 1s; 
+}
+
+.btn-smooth:hover {
+  background-color: red;
+}</code></pre>
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- Slide 11: Borders -->
+<article id="slide-11" class="slide">
+  <div class="slide-header">
+    <div class="slide-title-wrap">
+      <span class="slide-tag tag-variables">Unit 7 • Box Model</span>
+      <h2 class="slide-title">CSS Borders Anatomy</h2>
+      <div class="slide-title-arabic ar">تشريح حدود العناصر</div>
+    </div>
+    <div class="slide-category-pill">Concept</div>
+  </div>
+
+  <div class="slide-body">
+    <div class="content-text-side">
+      <p class="concept-lead">
+        The <span class="highlight">border</span> property adds a frame. It requires 3 values: Thickness, Style, and Color.
+      </p>
+      <div class="arabic-clarification">
+        خاصية border بتعمل إطار حوالين العنصر. لازم نحدد 3 حاجات بالترتيب: السُمك (بالبيكسل)، والنوع (مُصمت solid، أو مزدوج double)، واللون.
+      </div>
+    </div>
+    <div class="code-demo-side">
+      <div class="code-block-wrapper">
+        <div class="code-block-header">
+          <div class="mac-dots"><span></span><span></span><span></span></div>
+          <div class="code-lang-label">CSS</div>
+        </div>
+        <pre><code class="language-css">.alert-box {
   /* Thickness Type Color */
   border: 5px solid red;
 }
 
-.fancy-box {
-  border: 10px double blue;
+.fancy-frame {
+  border: 10px double gold;
 }</code></pre>
       </div>
+    </div>
+  </div>
+</article>
+
+<!-- Slide 12: Common Mistakes -->
+<article id="slide-12" class="slide">
+  <div class="slide-header">
+    <div class="slide-title-wrap">
+      <span class="slide-tag tag-review">Warning</span>
+      <h2 class="slide-title">Common Mistakes</h2>
+      <div class="slide-title-arabic ar">أخطاء شائعة (المطبات)</div>
+    </div>
+    <div class="slide-category-pill">Concept</div>
+  </div>
+
+  <div class="slide-body">
+    <div class="content-text-side">
+      <p class="concept-lead">
+        Watch out for these <span class="highlight">beginner traps</span> that cause major bugs in your code!
+      </p>
+      <div class="arabic-clarification">
+        تجنب هذه الأخطاء الأربعة لتصبح مبرمجاً محترفاً وموفراً للوقت!
+      </div>
+      <ul class="feature-list">
+        <li class="feature-item">
+          <div class="feature-icon icon-pink">1</div>
+          <div><strong>Forgetting to close tags:</strong> E.g., not closing <code>&lt;/h1&gt;</code>.</div>
+        </li>
+        <li class="feature-item">
+          <div class="feature-icon icon-pink">2</div>
+          <div><strong>Missing the dot:</strong> Writing <code>blue</code> instead of <code>.blue</code> for a class.</div>
+        </li>
+        <li class="feature-item">
+          <div class="feature-icon icon-pink">3</div>
+          <div><strong>color vs background-color:</strong> color only affects text!</div>
+        </li>
+        <li class="feature-item">
+          <div class="feature-icon icon-pink">4</div>
+          <div><strong>Transition inside hover:</strong> Causes a sudden snap back!</div>
+        </li>
+      </ul>
     </div>
   </div>
 </article>
